@@ -28,3 +28,6 @@ Route::get('/register', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
+Route::get('/profile', function () {
+    return view('profile');
+})->name('profile');
