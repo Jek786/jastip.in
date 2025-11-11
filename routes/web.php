@@ -16,3 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/bahasa', function () {
+    return view('bahasa'); 
+});
+Route::get('/login', function () {
+    return view('login');
+})->name('login'); // <- Memberi nama 'login'
+
+// 2. Rute untuk menampilkan halaman register
+Route::get('/register', function () {
+    return view('register');
+})->name('register'); // <- Ini yang memperbaiki error Anda
