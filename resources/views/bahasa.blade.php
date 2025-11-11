@@ -38,7 +38,7 @@
     <div class="mobile-screen-container">
         
         <header class="d-flex align-items-center p-3 bg-white shadow-sm">
-            <a href="#" class="text-dark text-decoration-none me-3" aria-label="Kembali">
+            <a href="welcome" class="text-dark text-decoration-none me-3" aria-label="Kembali">
                 <i class="bi bi-arrow-left fs-4"></i>
             </a>
             <h5 class="mb-0 fw-bold">Bahasa</h5>

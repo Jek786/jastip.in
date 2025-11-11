@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 Route::get('/bahasa', function () {
     return view('bahasa'); 
-});
+})->name('bahasa');
 Route::get('/login', function () {
     return view('login');
 })->name('login');
@@ -28,3 +28,6 @@ Route::get('/register', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
+Route::get('/profile', function () {
+    return view('profile');
+})->name('profile');
