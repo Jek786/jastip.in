@@ -21,9 +21,8 @@ Route::get('/bahasa', function () {
 });
 Route::get('/login', function () {
     return view('login');
-})->name('login'); // <- Memberi nama 'login'
-
-// 2. Rute untuk menampilkan halaman register
+})->name('login');
 Route::get('/register', function () {
     return view('register');
-})->name('register'); // <- Ini yang memperbaiki error Anda
+})->name('register');
+
