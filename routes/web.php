@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 Route::get('/bahasa', function () {
     return view('bahasa'); 
-});
+})->name('bahasa');
 Route::get('/login', function () {
     return view('login');
 })->name('login');
