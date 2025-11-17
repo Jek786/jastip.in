@@ -150,11 +150,11 @@
                     <i class="bi bi-chat-left fs-3"></i>
                 </a>
                 
-                <a href="#" class="btn-nav-center">
+                <a href="{{ route('welcome') }}" class="btn-nav-center">
                     <i class="bi bi-shop fs-2"></i>
                 </a>
                 
-                <a href="#" class="nav-link">
+                <a href="{{ route('profile') }}"class="nav-link">
                     <i class="bi bi-person fs-3"></i>
                 </a>
 
