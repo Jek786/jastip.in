@@ -17,3 +17,27 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+use Illuminate\Support\Facades\Hash;
+use App\Models\Buyer;
+use App\Models\Driver;
+
+Artisan::command('hash:users', function () {
+    $buyers = Buyer::all();
+    foreach ($buyers as $buyer) {
+        if (!Hash::needsRehash($buyer->password)) {
+            $buyer->password = Hash::make($buyer->password);
+            $buyer->save();
+        }
+    }
+
+    $drivers = Driver::all();
+    foreach ($drivers as $driver) {
+        if (!Hash::needsRehash($driver->password)) {
+            $driver->password = Hash::make($driver->password);
+            $driver->save();
+        }
+    }
+
+    $this->info('Semua password Buyer dan Driver sudah di-hash dengan benar.');
+});

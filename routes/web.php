@@ -1,3 +1,7 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
@@ -10,9 +14,17 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware('auth')->name('dashboard');
+Route::get('/dashboard', function (Request $request) {
+    if (!$request->session()->has('role')) {
+        return redirect()->route('login');
+    }
+
+    $user = $request->session()->get('user');
+
+    return view('dashboard', compact('user'));
+})->name('dashboard');
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/bahasa', function () {
     return view('bahasa');
@@ -20,7 +32,7 @@ Route::get('/bahasa', function () {
 
 Route::get('/profile', function () {
     return view('profile');
-})->middleware('auth')->name('profile');
+})->name('profile');
 
 Route::get('/welcome', function () {
     return view('welcome');
