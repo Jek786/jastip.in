@@ -88,12 +88,6 @@
         .text-orange:hover {
             color: #e68712;
         }
-
-        @media (max-width: 768px) {
-            .login-card {
-                padding: 30px 20px;
-            }
-        }
     </style>
 </head>
 
@@ -103,14 +97,19 @@
         <h2 class="fw-bold">Masuk</h2>
         <p class="mb-4">Yuk masuk dulu, biar bisa langsung titip makanan tanpa keluar asrama.</p>
 
-        <form action="{{ route('login') }}" method="POST">
+        {{-- Show error if login fails --}}
+        @if(session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+
+        <form action="{{ route('login') }}" method="POST" class="text-start">
             @csrf
 
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                    <input type="email" class="form-control" id="email" placeholder="Masukkan email anda" required>
+                    <input type="email" name="emailAddress" class="form-control" id="email" placeholder="Masukkan email anda" required>
                 </div>
             </div>
 
@@ -118,7 +117,7 @@
                 <label for="password" class="form-label">Kata Sandi</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                    <input type="password" class="form-control" id="password" placeholder="Masukkan kata sandi anda" required>
+                    <input type="password" name="password" class="form-control" id="password" placeholder="Masukkan kata sandi anda" required>
                 </div>
                 <a href="#" class="d-block mt-2 small text-orange text-end">Lupa kata sandi?</a>
             </div>
