@@ -103,7 +103,7 @@
         <h2 class="fw-bold">Masuk</h2>
         <p class="mb-4">Yuk masuk dulu, biar bisa langsung titip makanan tanpa keluar asrama.</p>
 
-        <form action="#" method="POST" class="text-start">
+        <form action="{{ route('login') }}" method="POST">
             @csrf
 
             <div class="mb-3">
