@@ -57,7 +57,6 @@ Route::get('/welcome', function () {
 
 // Halaman daftar
 Route::get('/daftar', function () {
-    return view('daftar');
 })->name('daftar');
 
 Route::get('/test-daftar', function () {
