@@ -60,16 +60,16 @@ Route::get('/daftar', function () {
     return view('daftar');
 })->name('daftar');
 
-Route::get('/daftar', function () {
-    return view('daftar');
+Route::get('/test-daftar', function () {
+    return view('test_daftar');
 })->name('test.daftar');
 
 // Submit daftar
 Route::post('/daftar', [AuthController::class, 'register'])->name('daftar.post');
 
 // Halaman Pesanan Masuk
-Route::get('/pesananmasuk', function () {
-    return view('pesananmasuk');
+Route::get('/pesananMasuk', function () {
+    return view('pesananMasuk');
 })->name('pesananmasuk');
 
 Route::get('/pesananmasuk', function () {
