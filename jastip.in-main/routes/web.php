@@ -66,3 +66,12 @@ Route::get('/daftar', function () {
 
 // Submit daftar
 Route::post('/daftar', [AuthController::class, 'register'])->name('daftar.post');
+
+// Halaman Pesanan Masuk
+Route::get('/pesananmasuk', function () {
+    return view('pesananmasuk');
+})->name('pesananmasuk');
+
+Route::get('/pesananmasuk', function () {
+    return view('pesananmasuk');
+})->name('test.pesananmasuk');
