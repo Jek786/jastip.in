@@ -71,6 +71,6 @@ Route::get('/pesananMasuk', function () {
     return view('pesananMasuk');
 })->name('pesananmasuk');
 
-Route::get('/pesananmasuk', function () {
-    return view('pesananmasuk');
-})->name('test.pesananmasuk');
+Route::get('/test-pesananMasuk', function () {
+    return view('pesananMasuk');
+})->name('test.pesananMasuk');
