@@ -32,6 +32,10 @@ Route::get('/managementpengantaran', function (Request $request) {
     return view('managementpengantaran');
 })->name('managementpengantaran');
 
+// 🔥 ROUTE TEST — bisa lihat halaman tanpa login
+Route::get('/test-managementpengantaran', function () {
+    return view('managementpengantaran');
+})->name('test.managementpengantaran');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
