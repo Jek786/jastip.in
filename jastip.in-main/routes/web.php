@@ -61,7 +61,7 @@ Route::get('/daftar', function () {
 })->name('daftar');
 
 Route::get('/test-daftar', function () {
-    return view('test_daftar');
+    return view('daftar');
 })->name('test.daftar');
 
 // Submit daftar
