@@ -32,6 +32,9 @@ Route::get('/managementpengantaran', function (Request $request) {
     return view('managementpengantaran');
 })->name('managementpengantaran');
 
+Route::get('/test-managementpengantaran', function () {
+    return view('managementpengantaran');
+})->name('test.managementpengantaran');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -46,3 +49,20 @@ Route::get('/profile', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
+
+
+// =======================
+// ROUTE DAFTAR BARU
+// =======================
+
+// Halaman daftar
+Route::get('/daftar', function () {
+    return view('daftar');
+})->name('daftar');
+
+Route::get('/daftar', function () {
+    return view('daftar');
+})->name('test.daftar');
+
+// Submit daftar
+Route::post('/daftar', [AuthController::class, 'register'])->name('daftar.post');
