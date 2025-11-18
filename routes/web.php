@@ -24,6 +24,15 @@ Route::get('/dashboard', function (Request $request) {
     return view('dashboard', compact('user'));
 })->name('dashboard');
 
+Route::get('/managementpengantaran', function (Request $request) {
+    if (!$request->session()->has('role')) {
+        return redirect()->route('login');
+    }
+
+    return view('managementpengantaran');
+})->name('managementpengantaran');
+
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/bahasa', function () {
