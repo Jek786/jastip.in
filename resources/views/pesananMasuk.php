@@ -18,7 +18,7 @@
   <style>
     body {
       background-color: #F2F4F7;
-      font-family: Poppins, sans serif;
+      font-family: Poppins, sans-serif;
       padding-bottom: 140px;
     }
 
@@ -146,14 +146,6 @@
       padding:0;
     }
 
-    .merchant-toggle i{
-      transition:transform .2s ease;
-    }
-
-    .merchant-toggle:not(.collapsed) i{
-      transform:rotate(180deg);
-    }
-
     .menu-block{
       border-top:1px solid #e4e6ec;
       padding-top:6px;
@@ -185,10 +177,21 @@
       margin-left:10px;
     }
 
+    /* animasi dan arah panah untuk semua toggle */
+    .merchant-toggle i,
     .menu-toggle i{
+      display:inline-block;        /* penting supaya rotate kelihatan */
       transition:transform .2s ease;
     }
 
+    /* tertutup: ada class collapsed, panah menghadap atas */
+    .merchant-toggle.collapsed i,
+    .menu-toggle.collapsed i{
+      transform:rotate(0deg);
+    }
+
+    /* terbuka: class collapsed hilang, panah menghadap bawah */
+    .merchant-toggle:not(.collapsed) i,
     .menu-toggle:not(.collapsed) i{
       transform:rotate(180deg);
     }
@@ -307,11 +310,9 @@
       <span class="page-title">Pesanan Masuk</span>
     </div>
 
-    <!-- data-elapsed diisi durasi awal dalam detik dari backend, misal 0 -->
     <span id="liveTime" class="header-time" data-elapsed="0">00:00:00</span>
   </header>
 
-  <!-- Date strip -->
   <div class="date-strip">
     <span class="date-text">Kamis, 15 Mei 2025</span>
     <span class="status-pill">Aktif</span>
@@ -319,7 +320,6 @@
 
   <div class="content-wrapper">
 
-    <!-- Stats -->
     <div class="row g-3">
       <div class="col-md-6">
         <div class="stat-card">
@@ -345,14 +345,15 @@
             <div class="merchant-sub">2 Pesanan Masuk</div>
           </div>
         </div>
+        <!-- awal tertutup: collapsed, panah ke atas -->
         <button class="merchant-toggle collapsed" type="button"
                 data-bs-toggle="collapse" data-bs-target="#mcBlock"
                 aria-expanded="false">
-          <i class="bi bi-chevron-down"></i>
+          <i class="bi bi-chevron-up"></i>
         </button>
       </div>
 
-      <div id="mcBlock" class="collapse show menu-block">
+      <div id="mcBlock" class="collapse menu-block">
 
         <!-- Panas 1 -->
         <div class="menu-row">
@@ -363,7 +364,7 @@
           <button class="menu-toggle collapsed" type="button"
                   data-bs-toggle="collapse" data-bs-target="#mcPanas1"
                   aria-expanded="false">
-            <i class="bi bi-caret-down-fill"></i>
+            <i class="bi bi-caret-up-fill"></i>
           </button>
         </div>
         <div id="mcPanas1" class="collapse">
@@ -384,7 +385,7 @@
           <button class="menu-toggle collapsed" type="button"
                   data-bs-toggle="collapse" data-bs-target="#mcPanasSpesial"
                   aria-expanded="false">
-            <i class="bi bi-caret-down-fill"></i>
+            <i class="bi bi-caret-up-fill"></i>
           </button>
         </div>
         <div id="mcPanasSpesial" class="collapse">
@@ -412,11 +413,11 @@
         <button class="merchant-toggle collapsed" type="button"
                 data-bs-toggle="collapse" data-bs-target="#juiceBlock"
                 aria-expanded="false">
-          <i class="bi bi-chevron-down"></i>
+          <i class="bi bi-chevron-up"></i>
         </button>
       </div>
 
-      <div id="juiceBlock" class="collapse show menu-block">
+      <div id="juiceBlock" class="collapse menu-block">
 
         <!-- Jus Mangga -->
         <div class="menu-row">
@@ -427,7 +428,7 @@
           <button class="menu-toggle collapsed" type="button"
                   data-bs-toggle="collapse" data-bs-target="#juiceMangga"
                   aria-expanded="false">
-            <i class="bi bi-caret-down-fill"></i>
+            <i class="bi bi-caret-up-fill"></i>
           </button>
         </div>
         <div id="juiceMangga" class="collapse">
@@ -448,7 +449,7 @@
           <button class="menu-toggle collapsed" type="button"
                   data-bs-toggle="collapse" data-bs-target="#juiceAlpukat"
                   aria-expanded="false">
-            <i class="bi bi-caret-down-fill"></i>
+            <i class="bi bi-caret-up-fill"></i>
           </button>
         </div>
         <div id="juiceAlpukat" class="collapse">
@@ -465,7 +466,6 @@
 
   </div>
 
-  <!-- Bottom bar -->
   <div class="bottom-bar">
     <div class="bottom-inner">
       <div class="bottom-left">
@@ -483,7 +483,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    // Timer durasi pesanan (HH:MM:SS) berbasis detik
     const timeEl = document.getElementById("liveTime");
     let elapsedSeconds = parseInt(timeEl.dataset.elapsed || "0", 10);
     let timerId = null;
@@ -504,11 +503,9 @@
       renderTimer();
     }
 
-    // mulai hitung saat halaman dibuka
     renderTimer();
     timerId = setInterval(tick, 1000);
 
-    // berhenti saat klik Mulai Jastip
     const btnMulai = document.getElementById("btnMulaiJastip");
     if (btnMulai){
       btnMulai.addEventListener("click", function(){
@@ -516,7 +513,6 @@
           clearInterval(timerId);
           timerId = null;
         }
-        // kalau mau kirim elapsedSeconds ke backend, bisa tambahkan ajax di sini
       });
     }
   </script>
