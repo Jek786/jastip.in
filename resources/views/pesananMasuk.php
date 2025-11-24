@@ -339,7 +339,7 @@
     <section class="merchant-card">
       <div class="merchant-header">
         <div class="merchant-info">
-          <img src="McD.png" alt="McD" class="merchant-img">
+          <img src="images/McD.jpg" alt="McD" class="merchant-img">
           <div>
             <div class="merchant-name">McDonald's - Central Park Mulyosari</div>
             <div class="merchant-sub">3 Pesanan Masuk</div>
@@ -403,7 +403,7 @@
     <section class="merchant-card">
       <div class="merchant-header">
         <div class="merchant-info">
-          <img src="Juice.png" alt="Juice Barokah" class="merchant-img">
+          <img src="images/Juice.jpg" alt="Juice Barokah" class="merchant-img">
           <div>
             <div class="merchant-name">Juice Barokah</div>
             <div class="merchant-sub">1 Pesanan Masuk</div>
@@ -469,7 +469,7 @@
   <div class="bottom-bar">
     <div class="bottom-inner">
       <div class="bottom-left">
-        <img src="delivery-logo.png" class="bottom-logo" alt="Delivery logo">
+        <img src="images/delivery-logo.png" class="bottom-logo" alt="Delivery logo">
         <div>
           <div class="bottom-info-title">Total Pesanan</div>
           <div class="bottom-amount">Rp 75.000,00</div>
