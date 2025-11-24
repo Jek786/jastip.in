@@ -50,3 +50,7 @@ Route::get('/profile', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
+
+Route::get('/test-daftar', function () {
+    return view('daftar');
+})->name('daftar');
