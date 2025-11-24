@@ -201,6 +201,7 @@
       font-size: 11px;
       color: var(--muted);
       text-align: center;
+      line-height: 1.4;
     }
 
     .foot-note a{
@@ -225,14 +226,16 @@
         <i class="bi bi-chevron-left fs-5"></i>
       </div>
 
+      <!-- Gelombang organik -->
       <svg class="hero-wave" viewBox="0 0 1440 80" preserveAspectRatio="none">
         <path
-          d="M0,40
-             C120,80 260,70 380,45
-             C460,30 560,20 660,35
-             C740,55 820,75 910,70
-             C1040,60 1180,35 1300,40
-             C1370,42 1410,50 1440,60
+          d="M0,60
+             C90,50 170,35 250,40
+             C330,45 390,65 470,64
+             C560,63 620,45 700,40
+             C780,35 860,45 930,55
+             C1010,67 1100,72 1180,60
+             C1260,48 1350,40 1440,50
              L1440,80 L0,80 Z"
           fill="#f5f7fb" />
       </svg>
@@ -305,8 +308,8 @@
           </p>
 
           <p class="foot-note mt-3 mb-0">
-            Dengan mendaftar, kamu menyetujui
-            <a href="#">Syarat & Ketentuan</a> dan
+            Dengan mendaftar, kamu menyetujui<br>
+            <a href="#">Syarat &amp; Ketentuan</a> dan
             <a href="#">Kebijakan Privasi</a> kami.
           </p>
         </form>
