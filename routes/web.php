@@ -54,3 +54,7 @@ Route::get('/welcome', function () {
 Route::get('/test-daftar', function () {
     return view('daftar');
 })->name('daftar');
+
+Route::get('/test-pesananMasuk', function () {
+    return view('pesananMasuk');
+})->name('pesananMasuk');
