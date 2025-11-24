@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Daftar</title>
 
+  <!-- Google Fonts Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -26,7 +31,7 @@
     body{
       margin: 0;
       background: var(--brand);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color: var(--text);
       min-height: 100vh;
       display: flex;
@@ -97,6 +102,7 @@
       color: #7b7b7b;
       margin-bottom: 8px;
       font-size: 14px;
+      font-weight: 400;
     }
 
     .heading-accent{
@@ -114,7 +120,7 @@
     }
 
     .form-label{
-      font-weight: 700;
+      font-weight: 600;
       font-size: 13px;
       color: #000;
       margin-bottom: 6px;
@@ -168,7 +174,7 @@
       font-size: 13px;
     }
 
-    /* matikan icon bawaan bootstrap supaya tidak dobel */
+    /* matikan icon bawaan bootstrap */
     .form-control.is-valid,
     .was-validated .form-control:valid,
     .form-control.is-invalid,
@@ -177,7 +183,6 @@
       padding-right: 0;
     }
 
-    /* ikon cek dan error custom di ujung kanan */
     .valid-icon,
     .error-icon{
       position: absolute;
@@ -205,13 +210,14 @@
       display: block;
     }
 
-    /* teks error rapat dan sejajar dengan isi input */
+    /* jarak teks error dengan isi input diperkecil */
     .input-group .invalid-feedback{
       padding-left: 0;
-      margin-left: 56px;      /* kira kira sejajar dengan teks input */
-      margin-top: 2px;
+      margin-left: 50px;      /* sejajar dengan teks setelah ikon */
+      margin-top: -4px;       /* lebih dekat ke input */
       margin-bottom: 0;
       font-size: 11px;
+      line-height: 1.25;
       color: #ff4b6a;
     }
 
@@ -237,12 +243,13 @@
       font-size: 14px;
       margin-top: 12px;
       color: #555;
+      font-weight: 400;
     }
 
     .already a{
       color: var(--brand-dark);
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 600;
     }
 
     .foot-note{
@@ -250,6 +257,7 @@
       color: var(--muted);
       text-align: center;
       line-height: 1.4;
+      font-weight: 400;
     }
 
     .foot-note a{
