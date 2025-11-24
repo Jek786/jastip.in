@@ -342,7 +342,7 @@
           <img src="images/McD.jpg" alt="McD" class="merchant-img">
           <div>
             <div class="merchant-name">McDonald's - Central Park Mulyosari</div>
-            <div class="merchant-sub">3 Pesanan Masuk</div>
+            <div class="merchant-sub">2 Pesanan Masuk</div>
           </div>
         </div>
         <button class="merchant-toggle collapsed" type="button"
@@ -369,8 +369,8 @@
         <div id="mcPanas1" class="collapse">
           <ul class="customer-list">
             <li class="customer-item">
-              <img src="pemesan1.png" class="customer-avatar" alt="Mary Jane">
-              <span class="customer-name">Mary Jane</span>
+              <img src="images/pemesan1.jpg" class="customer-avatar" alt="Mary">
+              <span class="customer-name">Mary</span>
             </li>
           </ul>
         </div>
@@ -390,8 +390,8 @@
         <div id="mcPanasSpesial" class="collapse">
           <ul class="customer-list">
             <li class="customer-item">
-              <img src="pemesan2.png" class="customer-avatar" alt="Mary Jane 2">
-              <span class="customer-name">Mary Jane</span>
+              <img src="images/pemesan2.jpg" class="customer-avatar" alt="Jiwon">
+              <span class="customer-name">Kim Jiwon</span>
             </li>
           </ul>
         </div>
@@ -406,7 +406,7 @@
           <img src="images/Juice.jpg" alt="Juice Barokah" class="merchant-img">
           <div>
             <div class="merchant-name">Juice Barokah</div>
-            <div class="merchant-sub">1 Pesanan Masuk</div>
+            <div class="merchant-sub">2 Pesanan Masuk</div>
           </div>
         </div>
         <button class="merchant-toggle collapsed" type="button"
@@ -433,8 +433,8 @@
         <div id="juiceMangga" class="collapse">
           <ul class="customer-list">
             <li class="customer-item">
-              <img src="pemesan3.png" class="customer-avatar" alt="Pemesan 3">
-              <span class="customer-name">Mary Jane</span>
+              <img src="images/pemesan3.jpg" class="customer-avatar" alt="Pemesan 3">
+              <span class="customer-name">Gong Myung</span>
             </li>
           </ul>
         </div>
@@ -454,8 +454,8 @@
         <div id="juiceAlpukat" class="collapse">
           <ul class="customer-list">
             <li class="customer-item">
-              <img src="pemesan4.png" class="customer-avatar" alt="Pemesan 4">
-              <span class="customer-name">Mary Jane</span>
+              <img src="images/pemesan4.jpg" class="customer-avatar" alt="Pemesan 4">
+              <span class="customer-name">Ryeo un</span>
             </li>
           </ul>
         </div>
