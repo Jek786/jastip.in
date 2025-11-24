@@ -206,7 +206,7 @@
             <div id="drop1" class="px-2 d-none">
                 <div class="list-item d-flex align-items-center">
                     <input type="checkbox" class="form-check-input me-2 order-check" data-user="soobin" data-status="done">
-                    <img src="images/user1.jpg" class="user-img me-3">
+                    <img src="images/ayampenyet.jpg" class="user-img me-3">
                     <div>
                         <p class="m-0 fw-semibold">Ayam Penyet</p>
                         <small>Status: <span class="status-text text-success fw-bold">Selesai</span></small>

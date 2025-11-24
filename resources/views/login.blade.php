@@ -80,7 +80,7 @@
                 <a href="#" class="d-block mt-2 small text-orange text-end">Lupa kata sandi?</a>
             </div>
             <button type="submit" class="btn-orange mt-3">Masuk</button>
-            <p class="text-center mt-3">Belum punya akun? <a href="{{ route('register') }}" class="text-orange fw-bold">Daftar</a></p>
+            <p class="text-center mt-3">Belum punya akun? <a href="{{ route('daftar') }}" class="text-orange fw-bold">Daftar</a></p>
         </form>
     </div>
 </body>

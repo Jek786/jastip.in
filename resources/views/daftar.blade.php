@@ -367,7 +367,7 @@
 
           <p class="already mt-3">
             Sudah punya akun
-            <a href="/login">Masuk</a>
+            <a href="{{ route('login') }}">Masuk</a>
           </p>
 
           <p class="foot-note mt-3 mb-0">
