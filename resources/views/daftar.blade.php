@@ -23,19 +23,29 @@
       --link:#0d6efd;
     }
 
+    /* Latar belakang ala welcome, konten kartu di tengah */
     body{
-      background: #ffffff;
+      margin: 0;
+      background: var(--brand);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
     }
 
-    .phone-frame{
-      max-width: 420px;
-      margin: 0 auto;
-      min-height: 100svh;
+    /* Kartu utama form daftar */
+    .auth-shell{
+      width: 100%;
+      max-width: 460px;
+      background: var(--soft);
+      border-radius: 28px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.16);
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      background: var(--soft);
     }
 
     .hero-top{
@@ -55,20 +65,16 @@
 
     .topbar{
       position: absolute;
-      inset: 12px 12px auto 12px;
+      inset: 12px 16px auto 16px;
       display: flex;
       align-items: center;
       gap: 8px;
       color: #fff;
+      cursor: pointer;
     }
 
     .sheet{
-      margin-top: -28px;
-      background: var(--soft);
-      border-top-left-radius: 28px;
-      border-top-right-radius: 28px;
-      padding: 24px 18px 32px;
-      box-shadow: 0 6px 24px rgba(0,0,0,.06);
+      padding: 24px 20px 32px;
       flex: 1;
     }
 
@@ -159,9 +165,9 @@
 </head>
 <body>
 
-  <main class="phone-frame">
+  <main class="auth-shell">
     <div class="hero-top">
-      <div class="topbar">
+      <div class="topbar" onclick="window.history.back()">
         <i class="bi bi-chevron-left fs-5"></i>
         <span class="fw-semibold">Kembali</span>
       </div>
@@ -195,7 +201,7 @@
             <label class="form-label">Kata Sandi</label>
             <div class="input-group">
               <span class="input-group-text"><i class="bi bi-lock"></i></span>
-              <input type="password" class="form-control" placeholder="Masukkan kata sandi anda" minlength="6" required>
+              <input id="password" type="password" class="form-control" placeholder="Masukkan kata sandi anda" minlength="6" required>
               <div class="invalid-feedback">Minimal 6 karakter</div>
             </div>
           </div>
@@ -227,7 +233,7 @@
     // Bootstrap style validation and simple confirm check
     (() => {
       const form = document.querySelector(".needs-validation");
-      const password = form.querySelector('input[type="password"]');
+      const password = document.getElementById("password");
       const confirm = document.getElementById("confirm");
 
       form.addEventListener("submit", e => {
