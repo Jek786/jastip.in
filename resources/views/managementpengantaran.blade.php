@@ -50,17 +50,29 @@
             object-fit: cover;
         }
 
-        .list-item {
+        .list-header {
             padding: 12px 0;
             border-bottom: 1px solid #dcdcdc;
+            cursor: pointer;
+        }
+
+        .list-item {
+            padding: 10px 0;
             font-size: 15px;
+        }
+
+        .user-img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .done-btn {
             background-color: #F5A700;
             color: white;
-            font-weight: 600;
             border-radius: 30px;
+            font-weight: 600;
             padding: 12px 0;
         }
 
@@ -73,9 +85,13 @@
             width: 100%;
         }
 
+        .rotate {
+            transform: rotate(180deg);
+            transition: 0.3s;
+        }
     </style>
-
 </head>
+
 <body>
 
     <!-- Header -->
@@ -85,8 +101,9 @@
         <div class="ms-auto header-icon">🔔</div>
     </div>
 
-    <!-- Date Section -->
-    <div class="px-3">
+    <div class="px-3 pb-5">
+
+        <!-- Date Section -->
         <div class="date-box mb-3">
             <p class="m-0 fw-bold">Kamis, 15 Mei 2025</p>
             <small class="text-muted">🏍️ Total Pengantaran : 2</small>
@@ -109,63 +126,145 @@
             </div>
         </div>
 
-        <!-- Building Cards -->
+        <!-- GEDUNG 1 -->
         <div class="building-card shadow-sm mb-3">
             <div class="d-flex align-items-center mb-2">
-                <img src="https://img.freepik.com/free-photo/futuristic-tower_23-2151094095.jpg" class="building-img me-2">
+                <img src="images/gedung1.png" class="building-img me-2">
                 <div>
                     <h6 class="fw-bold m-0">Gedung 1</h6>
                     <small class="text-muted">3 Pesanan</small>
                 </div>
             </div>
 
-            <div class="list-item d-flex justify-content-between">
+            <!-- Soobin -->
+            <div class="list-header d-flex justify-content-between align-items-center" onclick="toggleDropdown('drop1', 'arrow1')">
                 <span>Soobin</span>
-                <small class="text-muted">1 Pesanan Selesai ▼</small>
+                <span class="text-muted small">
+                    1 Pesanan Selesai 
+                    <span id="arrow1">▼</span>
+                </span>
             </div>
 
-            <div class="list-item d-flex justify-content-between">
+            <div id="drop1" class="px-2 d-none">
+                <div class="list-item d-flex">
+                    <img src="images/user1.jpg" class="user-img me-3">
+                    <div>
+                        <p class="m-0 fw-semibold">Ayam Penyet</p>
+                        <small>Status: <span class="text-success fw-bold">Selesai</span></small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yeonjun -->
+            <div class="list-header d-flex justify-content-between align-items-center" onclick="toggleDropdown('drop2','arrow2')">
                 <span>Yeonjun</span>
-                <small class="text-muted">1 Pesanan Tersisa ▼</small>
+                <span class="text-muted small">1 Pesanan Tersisa <span id="arrow2">▼</span></span>
             </div>
 
-            <div class="list-item d-flex justify-content-between">
+            <div id="drop2" class="px-2 d-none">
+                <div class="list-item d-flex">
+                    <img src="images/user2.jpg" class="user-img me-3">
+                    <div>
+                        <p class="m-0 fw-semibold">Bebek Penyet</p>
+                        <small>Status: <span class="text-warning fw-bold">Tersisa</span></small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beomgyu -->
+            <div class="list-header d-flex justify-content-between align-items-center" onclick="toggleDropdown('drop3','arrow3')">
                 <span>Beomgyu</span>
-                <small class="text-muted">1 Pesanan Tersisa ▼</small>
+                <span class="text-muted small">1 Pesanan Tersisa <span id="arrow3">▼</span></span>
+            </div>
+
+            <div id="drop3" class="px-2 d-none">
+                <div class="list-item d-flex">
+                    <img src="images/user3.jpg" class="user-img me-3">
+                    <div>
+                        <p class="m-0 fw-semibold">Burger Premium</p>
+                        <small>Status: <span class="text-warning fw-bold">Tersisa</span></small>
+                    </div>
+                </div>
             </div>
         </div>
 
+        <!-- TW-1 -->
         <div class="building-card shadow-sm mb-5">
             <div class="d-flex align-items-center mb-2">
-                <img src="https://img.freepik.com/free-photo/night-market-scene_23-2150477999.jpg" class="building-img me-2">
+                <img src="images/gedung2.png" class="building-img me-2">
                 <div>
                     <h6 class="fw-bold m-0">TW-1</h6>
                     <small class="text-muted">3 Pesanan</small>
                 </div>
             </div>
 
-            <div class="list-item d-flex justify-content-between">
+            <!-- Siti -->
+            <div class="list-header d-flex justify-content-between align-items-center" onclick="toggleDropdown('drop4','arrow4')">
                 <span>Siti Maharani</span>
-                <small class="text-muted">1 Pesanan Selesai ▼</small>
+                <span class="text-muted small">1 Pesanan Selesai <span id="arrow4">▼</span></span>
             </div>
 
-            <div class="list-item d-flex justify-content-between">
+            <div id="drop4" class="px-2 d-none">
+                <div class="list-item d-flex">
+                    <img src="images/user1.jpg" class="user-img me-3">
+                    <div>
+                        <p class="m-0 fw-semibold">Nasi Telur</p>
+                        <small>Status: <span class="text-success fw-bold">Selesai</span></small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bambang -->
+            <div class="list-header d-flex justify-content-between align-items-center" onclick="toggleDropdown('drop5','arrow5')">
                 <span>Bambang</span>
-                <small class="text-muted">1 Pesanan Selesai ▼</small>
+                <span class="text-muted small">1 Pesanan Selesai <span id="arrow5">▼</span></span>
             </div>
 
-            <div class="list-item d-flex justify-content-between">
+            <div id="drop5" class="px-2 d-none">
+                <div class="list-item d-flex">
+                    <img src="images/user2.jpg" class="user-img me-3">
+                    <div>
+                        <p class="m-0 fw-semibold">Ayam Geprek</p>
+                        <small>Status: <span class="text-success fw-bold">Selesai</span></small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jessica -->
+            <div class="list-header d-flex justify-content-between align-items-center" onclick="toggleDropdown('drop6','arrow6')">
                 <span>Jessica Jung</span>
-                <small class="text-muted">1 Pesanan Tersisa ▼</small>
+                <span class="text-muted small">1 Pesanan Tersisa <span id="arrow6">▼</span></span>
+            </div>
+
+            <div id="drop6" class="px-2 d-none">
+                <div class="list-item d-flex">
+                    <img src="images/user3.jpg" class="user-img me-3">
+                    <div>
+                        <p class="m-0 fw-semibold">Kopi Latte</p>
+                        <small>Status: <span class="text-warning fw-bold">Tersisa</span></small>
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
 
     <!-- Bottom Bar -->
-    <div class="bottom-bar text-center shadow-lg">
-        <button class="btn done-btn w-100">Pengantaran Selesai</button>
-    </div>
+   <div class="bottom-bar shadow-lg d-flex justify-content-between align-items-center">
+    <button class="btn done-btn px-4">Pengantaran Selesai</button>
+    <img src="images/delivery-logo.png" width="65" class="me-2">
+</div>
+
+
+    <script>
+        function toggleDropdown(id, arrowId) {
+            let drop = document.getElementById(id);
+            let arrow = document.getElementById(arrowId);
+
+            drop.classList.toggle("d-none");
+            arrow.classList.toggle("rotate");
+        }
+    </script>
 
 </body>
 </html>
