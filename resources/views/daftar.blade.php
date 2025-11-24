@@ -23,7 +23,6 @@
       --link:#0d6efd;
     }
 
-    /* Latar belakang website */
     body{
       margin: 0;
       background: var(--brand);
@@ -36,7 +35,6 @@
       padding: 32px 16px;
     }
 
-    /* Kartu utama di tengah */
     .auth-shell{
       width: 100%;
       max-width: 460px;
@@ -48,7 +46,6 @@
       flex-direction: column;
     }
 
-    /* Header oranye dengan bulatan */
     .hero-top{
       position: relative;
       height: 160px;
@@ -64,13 +61,12 @@
       background-color: var(--brand);
     }
 
-    /* Gelombang ooo di bawah header */
     .hero-wave{
       position: absolute;
       left: 0;
       bottom: -1px;
       width: 100%;
-      height: 60px;
+      height: 70px;
       display: block;
     }
 
@@ -229,10 +225,15 @@
         <i class="bi bi-chevron-left fs-5"></i>
       </div>
 
-      <!-- Gelombang -->
       <svg class="hero-wave" viewBox="0 0 1440 80" preserveAspectRatio="none">
         <path
-          d="M0,32 C120,0 240,64 360,32 C480,0 600,64 720,32 C840,0 960,64 1080,32 C1200,0 1320,64 1440,32 L1440,80 L0,80 Z"
+          d="M0,40
+             C120,80 260,70 380,45
+             C460,30 560,20 660,35
+             C740,55 820,75 910,70
+             C1040,60 1180,35 1300,40
+             C1370,42 1410,50 1440,60
+             L1440,80 L0,80 Z"
           fill="#f5f7fb" />
       </svg>
     </div>
@@ -314,7 +315,6 @@
   </main>
 
   <script>
-    // Validasi form dan cek konfirmasi password
     (() => {
       const form = document.querySelector(".needs-validation");
       const password = document.getElementById("password");
