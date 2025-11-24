@@ -168,7 +168,16 @@
       font-size: 13px;
     }
 
-    /* ikon cek dan error di ujung kanan */
+    /* matikan icon bawaan bootstrap supaya tidak dobel */
+    .form-control.is-valid,
+    .was-validated .form-control:valid,
+    .form-control.is-invalid,
+    .was-validated .form-control:invalid{
+      background-image: none;
+      padding-right: 0;
+    }
+
+    /* ikon cek dan error custom di ujung kanan */
     .valid-icon,
     .error-icon{
       position: absolute;
@@ -188,7 +197,6 @@
       color: #ff4b6a;
     }
 
-    /* tampilkan ikon sesuai state */
     .was-validated .form-control:valid ~ .valid-icon{
       display: block;
     }
@@ -197,10 +205,12 @@
       display: block;
     }
 
-    /* rapikan teks error */
+    /* teks error rapat dan sejajar dengan isi input */
     .input-group .invalid-feedback{
-      padding-left: 60px;
-      margin-top: 4px;
+      padding-left: 0;
+      margin-left: 56px;      /* kira kira sejajar dengan teks input */
+      margin-top: 2px;
+      margin-bottom: 0;
       font-size: 11px;
       color: #ff4b6a;
     }
