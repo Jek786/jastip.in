@@ -180,7 +180,7 @@
     /* animasi dan arah panah untuk semua toggle */
     .merchant-toggle i,
     .menu-toggle i{
-      display:inline-block;        /* penting supaya rotate kelihatan */
+      display:inline-block;
       transition:transform .2s ease;
     }
 
@@ -284,6 +284,84 @@
     .bottom-btn:hover{
       background:#F5A700;
       color:#ffffff;
+    }
+
+    /* modal konfirmasi mulai jastip */
+    .confirm-modal{
+      border-radius:32px;
+      border:0;
+      max-width:420px;
+      margin:0 auto;
+      box-shadow:0 18px 40px rgba(0,0,0,.35);
+      overflow:hidden;
+    }
+
+    .confirm-body{
+      position:relative;
+      padding:30px 28px 24px;
+      background:#fffaf3;
+    }
+
+    .confirm-title{
+      font-size:26px;
+      font-weight:700;
+      text-align:center;
+      margin-bottom:24px;
+    }
+
+    .confirm-buttons{
+      display:flex;
+      justify-content:center;
+      gap:16px;
+    }
+
+    .confirm-btn{
+      border-radius:999px;
+      padding:10px 32px;
+      font-weight:600;
+      font-size:16px;
+      border:none;
+      min-width:140px;
+    }
+
+    .confirm-btn-cancel{
+      background:#ffffff;
+      color:#F5A700;
+      border:2px solid #F5A700;
+    }
+
+    .confirm-btn-yes{
+      background:#F5A700;
+      color:#ffffff;
+    }
+
+    /* bubble dekorasi */
+    .confirm-body::before,
+    .confirm-body::after{
+      content:"";
+      position:absolute;
+      border-radius:999px;
+      background:radial-gradient(circle at 30% 30%, #ffe6b8 0, #ffe6b8 50%, transparent 51%);
+      opacity:.9;
+    }
+
+    .confirm-body::before{
+      width:190px;
+      height:190px;
+      top:-70px;
+      left:-40px;
+    }
+
+    .confirm-body::after{
+      width:170px;
+      height:170px;
+      bottom:-60px;
+      right:-30px;
+    }
+
+    .confirm-inner{
+      position:relative;
+      z-index:2;
     }
 
     @media (max-width:768px){
@@ -480,6 +558,32 @@
     </div>
   </div>
 
+  <!-- Modal Konfirmasi Mulai Jastip -->
+  <div class="modal fade" id="confirmMulaiModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content confirm-modal">
+        <div class="confirm-body">
+          <div class="confirm-inner">
+            <h2 class="confirm-title mb-0">Mulai pesan makanan?</h2>
+
+            <div class="confirm-buttons mt-4">
+              <button type="button"
+                      class="confirm-btn confirm-btn-cancel"
+                      data-bs-dismiss="modal">
+                Batalkan
+              </button>
+              <button type="button"
+                      class="confirm-btn confirm-btn-yes"
+                      id="btnConfirmMulai">
+                Ya
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
@@ -507,12 +611,25 @@
     timerId = setInterval(tick, 1000);
 
     const btnMulai = document.getElementById("btnMulaiJastip");
+    const modalEl = document.getElementById("confirmMulaiModal");
+    const confirmModal = new bootstrap.Modal(modalEl);
+    const btnConfirmMulai = document.getElementById("btnConfirmMulai");
+
     if (btnMulai){
       btnMulai.addEventListener("click", function(){
+        confirmModal.show();
+      });
+    }
+
+    if (btnConfirmMulai){
+      btnConfirmMulai.addEventListener("click", function(){
         if (timerId !== null){
           clearInterval(timerId);
           timerId = null;
         }
+        confirmModal.hide();
+        // kalau mau pindah halaman, taruh redirect di sini
+        // window.location.href = "/halaman-berikutnya";
       });
     }
   </script>
