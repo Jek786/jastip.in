@@ -125,6 +125,7 @@
       border: 2px solid var(--field-border);
       background: var(--field-bg);
       overflow: hidden;
+      position: relative;
     }
 
     .input-group .input-group-text{
@@ -165,6 +166,43 @@
     .form-control::placeholder{
       color: var(--brand-dark);
       font-size: 13px;
+    }
+
+    /* ikon cek dan error di ujung kanan */
+    .valid-icon,
+    .error-icon{
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      pointer-events: none;
+      display: none;
+    }
+
+    .valid-icon{
+      color: #22c55e;
+    }
+
+    .error-icon{
+      color: #ff4b6a;
+    }
+
+    /* tampilkan ikon sesuai state */
+    .was-validated .form-control:valid ~ .valid-icon{
+      display: block;
+    }
+
+    .was-validated .form-control:invalid ~ .error-icon{
+      display: block;
+    }
+
+    /* rapikan teks error */
+    .input-group .invalid-feedback{
+      padding-left: 60px;
+      margin-top: 4px;
+      font-size: 11px;
+      color: #ff4b6a;
     }
 
     .btn-brand{
@@ -226,7 +264,6 @@
         <i class="bi bi-chevron-left fs-5"></i>
       </div>
 
-      <!-- Gelombang organik -->
       <svg class="hero-wave" viewBox="0 0 1440 80" preserveAspectRatio="none">
         <path
           d="M0,60
@@ -257,6 +294,8 @@
                 </span>
               </span>
               <input type="text" class="form-control" placeholder="Masukkan nama anda" required>
+              <span class="valid-icon bi bi-check2"></span>
+              <span class="error-icon bi bi-info-circle"></span>
               <div class="invalid-feedback">Nama wajib diisi</div>
             </div>
           </div>
@@ -270,6 +309,8 @@
                 </span>
               </span>
               <input type="email" class="form-control" placeholder="Masukkan email anda" required>
+              <span class="valid-icon bi bi-check2"></span>
+              <span class="error-icon bi bi-info-circle"></span>
               <div class="invalid-feedback">Email tidak valid</div>
             </div>
           </div>
@@ -283,6 +324,8 @@
                 </span>
               </span>
               <input id="password" type="password" class="form-control" placeholder="Masukkan kata sandi anda" minlength="6" required>
+              <span class="valid-icon bi bi-check2"></span>
+              <span class="error-icon bi bi-info-circle"></span>
               <div class="invalid-feedback">Minimal 6 karakter</div>
             </div>
           </div>
@@ -296,6 +339,8 @@
                 </span>
               </span>
               <input id="confirm" type="password" class="form-control" placeholder="Masukkan ulang kata sandi anda" minlength="6" required>
+              <span class="valid-icon bi bi-check2"></span>
+              <span class="error-icon bi bi-info-circle"></span>
               <div class="invalid-feedback">Harus sama dengan kata sandi</div>
             </div>
           </div>
@@ -304,7 +349,7 @@
 
           <p class="already mt-3">
             Sudah punya akun
-            <a href="#">Masuk</a>
+            <a href="/login">Masuk</a>
           </p>
 
           <p class="foot-note mt-3 mb-0">
@@ -329,10 +374,12 @@
         } else {
           confirmPassword.setCustomValidity("");
         }
+
         if (!form.checkValidity()) {
           e.preventDefault();
           e.stopPropagation();
         }
+
         form.classList.add("was-validated");
       });
     })();
