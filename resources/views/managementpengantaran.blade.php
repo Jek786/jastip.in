@@ -196,7 +196,7 @@
             <!-- Dropdowns users -->
             <!-- Soobin -->
             <div class="list-header d-flex justify-content-between" onclick="toggleDropdown('drop1','arrow1')">
-                <span>Soobin</span>
+                <span>Mary</span>
                 <small class="text-muted">
                     <span id="label-soobin">1 Pesanan Selesai</span>
                     <span id="arrow1">▼</span>
@@ -208,7 +208,7 @@
                     <input type="checkbox" class="form-check-input me-2 order-check" data-user="soobin" data-status="done">
                     <img src="images/ayampenyet.jpg" class="user-img me-3">
                     <div>
-                        <p class="m-0 fw-semibold">Ayam Penyet</p>
+                        <p class="m-0 fw-semibold">Panas1</p>
                         <small>Status: <span class="status-text text-success fw-bold">Selesai</span></small>
                     </div>
                 </div>
@@ -228,7 +228,7 @@
                     <input type="checkbox" class="form-check-input me-2 order-check" data-user="yeonjun" data-status="pending">
                     <img src="images/user2.jpg" class="user-img me-3">
                     <div>
-                        <p class="m-0 fw-semibold">Bebek Penyet</p>
+                        <p class="m-0 fw-semibold">Panas Spesial</p>
                         <small>Status: <span class="status-text text-warning fw-bold">Tersisa</span></small>
                     </div>
                 </div>
