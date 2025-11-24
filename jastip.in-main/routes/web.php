@@ -60,7 +60,7 @@ Route::get('/daftar', function () {
     return view('daftar');
 })->name('daftar');
 
-Route::get('/daftar', function () {
+Route::get('/test-daftar', function () {
     return view('daftar');
 })->name('test.daftar');
 
@@ -68,10 +68,10 @@ Route::get('/daftar', function () {
 Route::post('/daftar', [AuthController::class, 'register'])->name('daftar.post');
 
 // Halaman Pesanan Masuk
-Route::get('/pesananmasuk', function () {
-    return view('pesananmasuk');
+Route::get('/pesananMasuk', function () {
+    return view('pesananMasuk');
 })->name('pesananmasuk');
 
-Route::get('/pesananmasuk', function () {
-    return view('pesananmasuk');
-})->name('test.pesananmasuk');
+Route::get('/test-pesananMasuk', function () {
+    return view('pesananMasuk');
+})->name('test.pesananMasuk');
