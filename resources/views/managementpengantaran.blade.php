@@ -1,6 +1,6 @@
-<!DOCTYPE html>
+<!DOCTYPE html>  <!-- 5026231038 - Nabila Shinta Luthfia -->
 <html lang="en">
-<head>
+<head>  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pengantaran</title>
@@ -344,7 +344,7 @@
         <div class="popup-box">
             <div class="popup-title">Apakah ingin mengakhiri sesi jastip?</div>
 
-            <button class="popup-btn-ya">Ya</button>
+            <button class="popup-btn-ya" onclick="goToDashboard()">Ya</button>
             <button class="popup-btn-tidak" onclick="closePopup()">Tidak</button>
         </div>
     </div>
@@ -361,6 +361,10 @@
 
         function closePopup() {
             document.getElementById("popup").style.display = "none";
+        }
+
+        function goToDashboard() {
+             window.location.href = "/dashboard"; 
         }
 
         const checkboxes = document.querySelectorAll(".order-check");

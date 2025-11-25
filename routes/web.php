@@ -4,11 +4,11 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 
-Route::get('/', function () {
+Route::get('/', function () {  //5026231038 - Nabila Shinta Luthfia
     return view('home');
 })->name('home');
 
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login'); //5026231038 - Nabila Shinta Luthfia
 Route::post('/login', [AuthController::class, 'login']);
 
 // 🔥 Route Daftar (pengganti register)
@@ -16,7 +16,7 @@ Route::get('/daftar', function () {
     return view('daftar'); // pastikan file resources/views/daftar.blade.php
 })->name('daftar');
 
-Route::get('/dashboard', function (Request $request) {
+Route::get('/dashboard', function (Request $request) { //5026231038 - Nabila Shinta Luthfia
     if (!$request->session()->has('role')) {
         return redirect()->route('login');
     }
@@ -26,7 +26,7 @@ Route::get('/dashboard', function (Request $request) {
     return view('dashboard', compact('user'));
 })->name('dashboard');
 
-Route::get('/managementpengantaran', function (Request $request) {
+Route::get('/managementpengantaran', function (Request $request) { //5026231038 - Nabila Shinta Luthfia
     if (!$request->session()->has('role')) {
         return redirect()->route('login');
     }
@@ -34,12 +34,12 @@ Route::get('/managementpengantaran', function (Request $request) {
     return view('managementpengantaran');
 })->name('managementpengantaran');
 
-// 🔥 ROUTE TEST — bisa lihat halaman tanpa login
+// 🔥 ROUTE TEST — bisa lihat halaman tanpa login //5026231038 - Nabila Shinta Luthfia
 Route::get('/test-managementpengantaran', function () {
     return view('managementpengantaran');
 })->name('test.managementpengantaran');
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); //5026231038 - Nabila Shinta Luthfia
 
 Route::get('/bahasa', function () {
     return view('bahasa');
@@ -49,7 +49,7 @@ Route::get('/profile', function () {
     return view('profile');
 })->name('profile');
 
-Route::get('/welcome', function () {
+Route::get('/welcome', function () { //5026231038 - Nabila Shinta Luthfia
     return view('welcome');
 })->name('welcome');
 
