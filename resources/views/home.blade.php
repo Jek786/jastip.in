@@ -49,7 +49,7 @@
         <p class="tagline mb-4">Titip makanan tanpa drama,<br>langsung sampai ke asrama</p>
         <div class="d-flex justify-content-center gap-3 mb-4">
             <a href="{{ route('login') }}" class="btn btn-primary px-4 py-2">Masuk</a>
-            <a href="{{ route('register') }}" class="btn btn-outline-dark px-4 py-2">Daftar</a>
+            <a href="{{ route('daftar') }}" class="btn btn-outline-dark px-4 py-2">Daftar</a>
         </div>
         <p class="text-dark-50 mb-2">Atau lanjut dengan akun sosial media:</p>
         <div class="d-flex justify-content-center gap-3">

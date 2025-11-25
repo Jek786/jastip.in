@@ -11,8 +11,10 @@ Route::get('/', function () {
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-Route::post('/register', [AuthController::class, 'register']);
+// 🔥 Route Daftar (pengganti register)
+Route::get('/daftar', function () {
+    return view('daftar'); // pastikan file resources/views/daftar.blade.php
+})->name('daftar');
 
 Route::get('/dashboard', function (Request $request) {
     if (!$request->session()->has('role')) {
@@ -51,6 +53,16 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
 
+<<<<<<< HEAD
 Route::get('/buka-jastip', function () {
     return view('bukaJastip');
 });
+=======
+Route::get('/test-daftar', function () {
+    return view('daftar');
+})->name('test.daftar');
+
+Route::get('/test-pesananMasuk', function () {
+    return view('pesananMasuk');
+})->name('pesananMasuk');
+>>>>>>> 9833ce2d4d0c49f03430165bba4227fa880e7e81
