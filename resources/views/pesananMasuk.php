@@ -628,8 +628,6 @@
           timerId = null;
         }
         confirmModal.hide();
-        // kalau mau pindah halaman, taruh redirect di sini
-        // window.location.href = "/halaman-berikutnya";
       });
     }
   </script>
