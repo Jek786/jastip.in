@@ -53,11 +53,6 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
 
-<<<<<<< HEAD
-Route::get('/buka-jastip', function () {
-    return view('bukaJastip');
-});
-=======
 Route::get('/test-daftar', function () {
     return view('daftar');
 })->name('test.daftar');
@@ -65,4 +60,3 @@ Route::get('/test-daftar', function () {
 Route::get('/test-pesananMasuk', function () {
     return view('pesananMasuk');
 })->name('pesananMasuk');
->>>>>>> 9833ce2d4d0c49f03430165bba4227fa880e7e81
