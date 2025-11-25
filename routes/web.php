@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JastipController;
+
 
 Route::get('/', function () {  //5026231038 - Nabila Shinta Luthfia
     return view('home');
@@ -60,3 +62,18 @@ Route::get('/test-daftar', function () {
 Route::get('/test-pesananMasuk', function () {
     return view('pesananMasuk');
 })->name('pesananMasuk');
+
+Route::get('/buka-jastip', [JastipController::class, 'index'])
+    ->name('jastip.index');
+
+Route::post('/buka-jastip/waktu', [JastipController::class, 'setWaktu'])
+    ->name('jastip.setWaktu');
+
+Route::post('/buka-jastip/slot', [JastipController::class, 'setSlot'])
+    ->name('jastip.setSlot');
+
+Route::post('/buka-jastip/biaya', [JastipController::class, 'setBiaya'])
+    ->name('jastip.setBiaya');
+
+Route::post('/buka-jastip/start', [JastipController::class, 'startJastip'])
+    ->name('jastip.start');
