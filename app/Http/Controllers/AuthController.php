@@ -50,7 +50,7 @@ class AuthController extends Controller
 
     public function showRegister()
     {
-        return view('register');
+        return view('daftar');
     }
 
     public function register(Request $request)
@@ -67,6 +67,6 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('login');
+        return redirect()->route('login')->with('success', 'Registrasi berhasil, silakan login.');
     }
 }
