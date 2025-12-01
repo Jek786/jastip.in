@@ -53,17 +53,17 @@ class AuthController extends Controller
         return view('daftar');
     }
 
-    public function register(Request $request)
+     public function daftar(Request $request)
     {
         $request->validate([
-            'name' => 'required|min:3',
-            'emailAddress' => 'required|email|unique:buyer,emailAddress',
-            'password' => 'required|min:6|confirmed',
+            'name'          => 'required|min:3',
+            'emailAddress'  => 'required|email|unique:users,email',
+            'password'      => 'required|min:6|confirmed',
         ]);
 
-        Buyer::create([
-            'name' => $request->name,
-            'emailAddress' => $request->emailAddress,
+        User::create([
+            'name'     => $request->name,
+            'email'    => $request->emailAddress,
             'password' => Hash::make($request->password),
         ]);
 
