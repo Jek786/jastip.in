@@ -13,10 +13,10 @@ Route::get('/', function () {  //5026231038 - Nabila Shinta Luthfia
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login'); //5026231038 - Nabila Shinta Luthfia
 Route::post('/login', [AuthController::class, 'login']);
 
-// 🔥 Route Daftar (pengganti register)
-Route::get('/daftar', function () {
-    return view('daftar'); // pastikan file resources/views/daftar.blade.php
-})->name('daftar');
+
+Route::get('/daftar', [AuthController::class, 'showDaftar'])->name('daftar');
+Route::post('/daftar', [AuthController::class, 'daftar'])->name('daftar.submit');
+
 
 Route::get('/dashboard', function (Request $request) { //5026231038 - Nabila Shinta Luthfia
     if (!$request->session()->has('role')) {
@@ -36,7 +36,7 @@ Route::get('/managementpengantaran', function (Request $request) { //5026231038 
     return view('managementpengantaran');
 })->name('managementpengantaran');
 
-// 🔥 ROUTE TEST — bisa lihat halaman tanpa login //5026231038 - Nabila Shinta Luthfia
+// ROUTE TEST — bisa lihat halaman tanpa login //5026231038 - Nabila Shinta Luthfia
 Route::get('/test-managementpengantaran', function () {
     return view('managementpengantaran');
 })->name('test.managementpengantaran');
