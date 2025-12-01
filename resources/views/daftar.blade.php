@@ -13,9 +13,6 @@
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Bootstrap Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
   <style>
     :root{
       --brand:#ff9f1a;
@@ -25,13 +22,12 @@
       --muted:#6c757d;
       --field-bg:#f5f5f5;
       --field-border:#ff9f1a;
-      --link:#0d6efd;
     }
 
     body{
       margin: 0;
       background: var(--brand);
-      font-family: "Poppins", sans-serif;
+      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color: var(--text);
       min-height: 100vh;
       display: flex;
@@ -139,11 +135,9 @@
       background: transparent;
       padding-left: 16px;
       padding-right: 4px;
-      color: var(--brand-dark);
-      font-size: 16px;
     }
 
-    .input-group .icon-circle{
+    .icon-circle{
       width: 30px;
       height: 30px;
       border-radius: 999px;
@@ -151,8 +145,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
-      font-size: 14px;
+    }
+
+    .icon-circle img{
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+      display: block;
     }
 
     .form-control{
@@ -174,6 +173,17 @@
       font-size: 13px;
     }
 
+    /* teks error seperti desain lama, posisi seperti versi baru */
+    .input-group .invalid-feedback{
+      padding-left: 0;
+      margin-left: 50px;      /* sejajar dengan teks setelah ikon */
+      margin-top: -4px;
+      margin-bottom: 0;
+      font-size: 11px;
+      line-height: 1.25;
+      color: #ff4b6a;
+    }
+
     .btn-brand{
       background: var(--brand);
       color: #fff;
@@ -185,6 +195,7 @@
       font-size: 15px;
     }
 
+    .btn-brand:active,
     .btn-brand:hover{
       background: var(--brand-dark);
       color: #fff;
@@ -203,6 +214,13 @@
       text-decoration: none;
       font-weight: 600;
     }
+
+    @media (max-width: 576px){
+      .auth-shell{
+        border-radius: 0;
+        max-width: 480px;
+      }
+    }
   </style>
 </head>
 
@@ -215,20 +233,27 @@
       </div>
 
       <svg class="hero-wave" viewBox="0 0 1440 80" preserveAspectRatio="none">
-        <path d="M0,60 C90,50 170,35 250,40 C330,45 390,65 470,64 C560,63 620,45 700,40 C780,35 860,45 930,55 C1010,67 1100,72 1180,60 C1260,48 1350,40 1440,50 L1440,80 L0,80 Z"
+        <path
+          d="M0,60 C90,50 170,35 250,40
+             C330,45 390,65 470,64
+             C560,63 620,45 700,40
+             C780,35 860,45 930,55
+             C1010,67 1100,72 1180,60
+             C1260,48 1350,40 1440,50
+             L1440,80 L0,80 Z"
           fill="#f5f7fb" />
       </svg>
     </div>
 
     <section class="sheet">
       <h1 class="heading">Daftar</h1>
-      <p class="subtitle">Gabung bareng kami dan nikmati kemudahan titip makanan</p>
+      <p class="subtitle">Gabung bareng kami dan nikmati kemudahan titip makanan favoritmu</p>
       <div class="heading-accent"></div>
 
       <div class="form-card">
 
         <!-- FORM MULAI -->
-        <form action="{{ route('daftar.submit') }}" method="POST" class="needs-validation" novalidate>
+        <form action="{{ route('daftar.submit') }}" method="POST">
           @csrf
 
           <!-- NAMA -->
@@ -236,14 +261,23 @@
             <label class="form-label">Nama</label>
             <div class="input-group">
               <span class="input-group-text">
-                <span class="icon-circle"><i class="bi bi-pencil"></i></span>
+                <span class="icon-circle">
+                  <img src="{{ asset('images/nama.png') }}" alt="Nama">
+                </span>
               </span>
-              <input type="text" name="name" class="form-control"
-                placeholder="Masukkan nama anda" value="{{ old('name') }}" required>
+              <input
+                type="text"
+                name="name"
+                class="form-control"
+                placeholder="Masukkan nama anda"
+                value="{{ old('name') }}"
+                required>
+              @error('name')
+                <div class="invalid-feedback d-block">
+                  Nama wajib diisi.
+                </div>
+              @enderror
             </div>
-            @error('name')
-              <div class="text-danger mt-1">{{ $message }}</div>
-            @enderror
           </div>
 
           <!-- EMAIL -->
@@ -251,14 +285,23 @@
             <label class="form-label">Email</label>
             <div class="input-group">
               <span class="input-group-text">
-                <span class="icon-circle"><i class="bi bi-envelope"></i></span>
+                <span class="icon-circle">
+                  <img src="{{ asset('images/email.png') }}" alt="Email">
+                </span>
               </span>
-              <input type="email" name="emailAddress" class="form-control"
-                placeholder="Masukkan email anda" value="{{ old('emailAddress') }}" required>
+              <input
+                type="email"
+                name="emailAddress"
+                class="form-control"
+                placeholder="Masukkan email anda"
+                value="{{ old('emailAddress') }}"
+                required>
+              @error('emailAddress')
+                <div class="invalid-feedback d-block">
+                  Email tidak valid atau sudah terdaftar.
+                </div>
+              @enderror
             </div>
-            @error('emailAddress')
-              <div class="text-danger mt-1">{{ $message }}</div>
-            @enderror
           </div>
 
           <!-- PASSWORD -->
@@ -266,14 +309,23 @@
             <label class="form-label">Kata Sandi</label>
             <div class="input-group">
               <span class="input-group-text">
-                <span class="icon-circle"><i class="bi bi-lock"></i></span>
+                <span class="icon-circle">
+                  <img src="{{ asset('images/sandi.png') }}" alt="Kata sandi">
+                </span>
               </span>
-              <input type="password" name="password" class="form-control"
-                placeholder="Masukkan kata sandi anda" minlength="6" required>
+              <input
+                type="password"
+                name="password"
+                class="form-control"
+                placeholder="Masukkan kata sandi anda"
+                minlength="6"
+                required>
+              @error('password')
+                <div class="invalid-feedback d-block">
+                  Kata sandi minimal 6 karakter dan harus sama dengan konfirmasi.
+                </div>
+              @enderror
             </div>
-            @error('password')
-              <div class="text-danger mt-1">{{ $message }}</div>
-            @enderror
           </div>
 
           <!-- KONFIRM PASSWORD -->
@@ -281,10 +333,17 @@
             <label class="form-label">Konfirmasi Kata Sandi</label>
             <div class="input-group">
               <span class="input-group-text">
-                <span class="icon-circle"><i class="bi bi-lock-fill"></i></span>
+                <span class="icon-circle">
+                  <img src="{{ asset('images/sandi.png') }}" alt="Konfirmasi sandi">
+                </span>
               </span>
-              <input type="password" name="password_confirmation" class="form-control"
-                placeholder="Masukkan ulang kata sandi anda" required>
+              <input
+                type="password"
+                name="password_confirmation"
+                class="form-control"
+                placeholder="Masukkan ulang kata sandi anda"
+                minlength="6"
+                required>
             </div>
           </div>
 
