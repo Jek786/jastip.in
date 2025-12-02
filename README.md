@@ -6,6 +6,7 @@
 ### Jek786 --> Dzaky Ahmad
 ### nabilashinta --> Nabila Shinta
 ### chandiki --> Amandea Chandiki 
+### 1harbima --> Harbima Razan
 
 ### 1. Clone this Repo
 Use bash or terminal to clone this repo
