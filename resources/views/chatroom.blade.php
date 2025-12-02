@@ -16,7 +16,7 @@
     <style>
         :root {
             --brand-orange: #F7941D;
-            --brand-bg-light: #EBEBEB; /* Background chat agak abu muda */
+            --brand-bg-light: #EBEBEB;
             --chat-bubble-sender: #F7941D;
             --chat-bubble-receiver: #C4C4C4; 
             --text-dark: #1A1A1A;
@@ -30,9 +30,10 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
+            margin: 0;
+            overflow: hidden;
         }
 
-        /* --- Header --- */
         .chat-header {
             background-color: #FFFFFF;
             padding: 1rem 1rem 0.5rem 1rem;
@@ -63,7 +64,6 @@
             color: var(--brand-orange);
         }
 
-        /* --- Area Chat --- */
         .chat-content {
             flex-grow: 1;
             padding: 1.5rem;
@@ -80,6 +80,18 @@
             font-size: 0.9rem;
             line-height: 1.4;
             position: relative;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .message-time {
@@ -90,7 +102,6 @@
             opacity: 0.6;
         }
 
-        /* Pesan Masuk (Abu-abu) - Ada "ekor" di kiri atas */
         .message-received {
             align-self: flex-start;
             background-color: var(--chat-bubble-receiver);
@@ -98,7 +109,6 @@
             border-radius: 0 1rem 1rem 1rem;
         }
 
-        /* Pesan Terkirim (Oranye) - Ada "ekor" di kanan atas */
         .message-sent {
             align-self: flex-end;
             background-color: var(--chat-bubble-sender);
@@ -106,9 +116,8 @@
             border-radius: 1rem 0 1rem 1rem;
         }
 
-        /* Pesan Sistem (Konfirmasi) */
         .message-system {
-            align-self: center; /* Rata kiri sesuai gambar, tapi width full */
+            align-self: center;
             background-color: var(--chat-bubble-receiver);
             width: fit-content;
             max-width: 90%;
@@ -116,7 +125,6 @@
             margin-bottom: 0.5rem;
         }
 
-        /* --- Input Bar (Desain Baru) --- */
         .chat-input-area {
             position: fixed;
             bottom: 0;
@@ -153,15 +161,24 @@
             color: var(--text-dark);
             padding: 0.5rem;
             cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .btn-send-mini:hover {
+            color: var(--brand-orange);
         }
 
         .action-icon {
             font-size: 1.4rem;
             color: #1A1A1A;
             cursor: pointer;
+            transition: color 0.2s;
         }
 
-        /* --- Modal Rincian Pesanan (Frame 65) --- */
+        .action-icon:hover {
+            color: var(--brand-orange);
+        }
+
         .modal-content-order {
             border-radius: 1.5rem;
             border: none;
@@ -185,6 +202,52 @@
             color: var(--brand-orange);
             font-weight: 600;
         }
+
+        .typing-indicator {
+            align-self: flex-start;
+            background-color: var(--chat-bubble-receiver);
+            color: var(--text-dark);
+            border-radius: 0 1rem 1rem 1rem;
+            padding: 0.8rem 1.2rem;
+            display: none;
+        }
+
+        .typing-indicator.show {
+            display: block;
+        }
+
+        .typing-dots {
+            display: inline-flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background-color: var(--text-dark);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+            opacity: 0.4;
+        }
+
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.4;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -192,13 +255,13 @@
     <header class="chat-header">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center gap-3">
-                <a href="#" class="text-dark"><i class="bi bi-chevron-left fs-4"></i></a>
+                <a href="#" onclick="history.back()" class="text-dark"><i class="bi bi-chevron-left fs-4"></i></a>
                 
                 <img src="https://i.pravatar.cc/300?u=siti" alt="Avatar" class="user-avatar">
                 <h5 class="fw-bold mb-0">Siti Maharani</h5>
             </div>
             
-            <a href="#" class="text-dark"><i class="bi bi-telephone fs-4"></i></a>
+            <a href="call" class="text-dark"><i class="bi bi-telephone fs-4"></i></a>
         </div>
 
         <div class="header-dropdown-trigger" data-bs-toggle="modal" data-bs-target="#orderDetailModal">
@@ -206,7 +269,7 @@
         </div>
     </header>
 
-    <main class="chat-content">
+    <main class="chat-content" id="chatContent">
         
         <div class="message-bubble message-system">
             <span>Pesanan Siti telah dikonfirmasi</span><br>
@@ -244,18 +307,26 @@
             <span class="message-time">11.55</span>
         </div>
 
+        <div class="typing-indicator" id="typingIndicator">
+            <div class="typing-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
     </main>
 
     <div class="chat-input-area">
-        <i class="bi bi-plus-lg action-icon"></i>
+        <i class="bi bi-plus-lg action-icon" id="btnAttach"></i>
         
         <div class="input-wrapper">
-            <input type="text" class="chat-input-field" placeholder="">
-            <i class="bi bi-send-fill btn-send-mini"></i>
+            <input type="text" class="chat-input-field" id="messageInput" placeholder="Ketik pesan...">
+            <i class="bi bi-send-fill btn-send-mini" id="btnSend"></i>
         </div>
         
-        <i class="bi bi-camera-fill action-icon"></i>
-        <i class="bi bi-mic-fill action-icon"></i>
+        <i class="bi bi-camera-fill action-icon" id="btnCamera"></i>
+        <i class="bi bi-mic-fill action-icon" id="btnMic"></i>
     </div>
 
     <div class="modal fade" id="orderDetailModal" tabindex="-1" aria-hidden="true">
@@ -313,7 +384,94 @@
             </div>
         </div>
     </div>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        const chatContent = document.getElementById('chatContent');
+        const messageInput = document.getElementById('messageInput');
+        const btnSend = document.getElementById('btnSend');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const btnAttach = document.getElementById('btnAttach');
+        const btnCamera = document.getElementById('btnCamera');
+        const btnMic = document.getElementById('btnMic');
+
+        function getCurrentTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            return `${hours}.${minutes}`;
+        }
+
+        function scrollToBottom() {
+            chatContent.scrollTop = chatContent.scrollHeight;
+        }
+
+        function createMessageBubble(text, type = 'sent') {
+            const bubble = document.createElement('div');
+            bubble.className = `message-bubble message-${type}`;
+            bubble.innerHTML = `
+                ${text}
+                <span class="message-time">${getCurrentTime()}</span>
+            `;
+            return bubble;
+        }
+
+        function sendMessage() {
+            const text = messageInput.value.trim();
+            if (text === '') return;
+
+            const messageBubble = createMessageBubble(text, 'sent');
+            chatContent.insertBefore(messageBubble, typingIndicator);
+            
+            messageInput.value = '';
+            scrollToBottom();
+
+            // Simulasi balasan otomatis
+            setTimeout(() => {
+                typingIndicator.classList.add('show');
+                scrollToBottom();
+
+                setTimeout(() => {
+                    typingIndicator.classList.remove('show');
+                    
+                    const replies = [
+                        'Oke kak, siap!',
+                        'Baik, sudah dicatat ya kak',
+                        'Siap kak, nanti kami proses',
+                        'Terima kasih infonya kak!',
+                        'Oke noted kak 👍'
+                    ];
+                    
+                    const randomReply = replies[Math.floor(Math.random() * replies.length)];
+                    const replyBubble = createMessageBubble(randomReply, 'received');
+                    chatContent.insertBefore(replyBubble, typingIndicator);
+                    scrollToBottom();
+                }, 2000);
+            }, 500);
+        }
+
+        btnSend.addEventListener('click', sendMessage);
+
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        btnAttach.addEventListener('click', () => {
+            alert('Fitur attachment akan segera hadir!');
+        });
+
+        btnCamera.addEventListener('click', () => {
+            alert('Fitur kamera akan segera hadir!');
+        });
+
+        btnMic.addEventListener('click', () => {
+            alert('Fitur voice message akan segera hadir!');
+        });
+
+        scrollToBottom();
+    </script>
 </body>
 </html>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChatController;
 
 Route::get('/', function () {
     return view('home');
@@ -32,6 +33,9 @@ Route::get('/managementpengantaran', function (Request $request) {
     return view('managementpengantaran');
 })->name('managementpengantaran');
 
+Route::get('/test-managementpengantaran', function () {
+    return view('managementpengantaran');
+})->name('test.managementpengantaran');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -46,3 +50,34 @@ Route::get('/profile', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
+
+Route::get('/home-chat', function () {
+    return view('home-chat');
+})->name('home-chat');
+
+Route::get('/home-chat-unreaded', function () {
+    return view('home-chat-unreaded');
+})->name('home-chat-unreaded');
+
+Route::get('/call', function () {
+    return view('call');
+})->name('call');
+
+Route::get('/chatroom', function () {
+    return view('chatroom');
+})->name('chatroom');
+
+Route::get('/chatroom-complaint', function () {
+    return view('chatroom-complaint');
+})->name('chatroom-complaint');
+
+Route::prefix('chat')->name('chat.')->group(function () {
+    Route::get('/{buyerId}', [ChatController::class, 'show'])->name('show');
+    Route::post('/send', [ChatController::class, 'sendMessage'])->name('send');
+    Route::get('/messages/{buyerId}', [ChatController::class, 'getMessages'])->name('messages');
+    Route::post('/refund', [ChatController::class, 'refund'])->name('refund');
+    Route::post('/end', [ChatController::class, 'endChat'])->name('end');
+    Route::post('/mark-read/{chatId}', [ChatController::class, 'markAsRead'])->name('markRead');
+});
+
+Route::get('/test-chat/{buyerId}', [ChatController::class, 'show'])->name('test.chat');

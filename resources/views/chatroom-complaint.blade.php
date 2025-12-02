@@ -16,7 +16,7 @@
     <style>
         :root {
             --brand-orange: #F7941D;
-            --brand-bg-light: #EBEBEB; /* Disamakan dengan Ongoing Chat agar konsisten */
+            --brand-bg-light: #EBEBEB;
             --chat-bubble-sender: #F7941D;
             --chat-bubble-receiver: #D9D9D9; 
             --chat-bubble-system: #C4C4C4;
@@ -31,9 +31,10 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            margin: 0;
+            overflow: hidden;
         }
 
-        /* --- Header --- */
         .chat-header {
             background-color: #FFFFFF;
             padding: 1rem 1rem 0.5rem 1rem;
@@ -82,7 +83,6 @@
             color: var(--brand-orange);
         }
 
-        /* --- Area Chat --- */
         .chat-content {
             flex-grow: 1;
             padding: 1rem;
@@ -99,6 +99,18 @@
             position: relative;
             font-size: 0.95rem;
             line-height: 1.4;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .message-time {
@@ -134,7 +146,6 @@
             font-size: 0.9rem;
         }
 
-        /* --- Input Bar (UPDATED: Gaya Baru Konsisten) --- */
         .chat-input-area {
             position: fixed;
             bottom: 0;
@@ -171,15 +182,24 @@
             color: var(--text-dark);
             padding: 0.5rem;
             cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .btn-send-mini:hover {
+            color: var(--brand-orange);
         }
 
         .action-icon {
             font-size: 1.4rem;
             color: #1A1A1A;
             cursor: pointer;
+            transition: color 0.2s;
         }
 
-        /* --- Modal Pesanan Bermasalah --- */
+        .action-icon:hover {
+            color: var(--brand-orange);
+        }
+
         .modal-content {
             border-radius: 1.5rem;
             border: none;
@@ -193,6 +213,13 @@
             border-radius: 2rem;
             font-weight: 600;
             border: 1px solid var(--brand-orange);
+            transition: all 0.3s;
+        }
+
+        .btn-modal-primary:hover {
+            background-color: #e68519;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(247, 148, 29, 0.3);
         }
         
         .btn-modal-outline {
@@ -201,11 +228,80 @@
             border: 1px solid var(--brand-orange);
             border-radius: 2rem;
             font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-modal-outline:hover {
+            background-color: var(--brand-orange);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(247, 148, 29, 0.3);
         }
         
         .dashed-line {
             border-top: 2px dashed #ccc;
             margin: 1.5rem 0;
+        }
+
+        .typing-indicator {
+            align-self: flex-start;
+            background-color: var(--chat-bubble-receiver);
+            color: var(--text-dark);
+            border-radius: 0 1rem 1rem 1rem;
+            padding: 0.75rem 1rem;
+            display: none;
+        }
+
+        .typing-indicator.show {
+            display: block;
+        }
+
+        .typing-dots {
+            display: inline-flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background-color: var(--text-dark);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+            opacity: 0.4;
+        }
+
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.4;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
         }
     </style>
 </head>
@@ -214,14 +310,14 @@
     <header class="chat-header">
         <div class="chat-header-top">
             <div class="d-flex align-items-center gap-3">
-                <a href="#" class="text-dark"><i class="bi bi-chevron-left fs-4"></i></a>
+                <a href="#" onclick="history.back()" class="text-dark"><i class="bi bi-chevron-left fs-4"></i></a>
                 <img src="https://i.pravatar.cc/150?u=bambang" alt="Avatar" class="user-avatar">
                 <div class="user-info">
                     <h5>Bambang Gemoy</h5>
                 </div>
             </div>
             <div>
-                <i class="bi bi-telephone fs-4"></i>
+                <a href="call" class="text-dark"><i class="bi bi-telephone fs-4"></i></a>
             </div>
         </div>
 
@@ -230,7 +326,7 @@
         </div>
     </header>
 
-    <main class="chat-content">
+    <main class="chat-content" id="chatContent">
         <div class="message-bubble message-system">
             Pesanan Siti telah dikonfirmasi<br>
             <span class="opacity-75">[Pesan ini dibuat secara otomatis]</span>
@@ -271,18 +367,24 @@
             Kalo aku refund aja gimana kaa? Aman kaahh?
             <span class="message-time">12.12</span>
         </div>
-        
-        <div style="height: 100px;"></div> 
+
+        <div class="typing-indicator" id="typingIndicator">
+            <div class="typing-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </main>
 
     <div class="chat-input-area">
-        <i class="bi bi-plus-lg action-icon"></i>
+        <i class="bi bi-plus-lg action-icon" id="btnAttach"></i>
         <div class="input-wrapper">
-            <input type="text" class="chat-input-field" placeholder="">
-            <i class="bi bi-send-fill btn-send-mini"></i>
+            <input type="text" class="chat-input-field" id="messageInput" placeholder="Ketik pesan...">
+            <i class="bi bi-send-fill btn-send-mini" id="btnSend"></i>
         </div>
-        <i class="bi bi-camera-fill action-icon"></i>
-        <i class="bi bi-mic-fill action-icon"></i>
+        <i class="bi bi-camera-fill action-icon" id="btnCamera"></i>
+        <i class="bi bi-mic-fill action-icon" id="btnMic"></i>
     </div>
 
     <div class="modal fade" id="orderIssueModal" tabindex="-1" aria-hidden="true">
@@ -319,11 +421,16 @@
 
                     <div class="row g-2">
                         <div class="col-6">
-                            <button class="btn btn-modal-primary w-100 py-2">Refund</button>
+                            <button class="btn btn-modal-primary w-100 py-2" id="btnRefund">Refund</button>
                         </div>
                         <div class="col-6">
-                            <button class="btn btn-modal-outline w-100 py-2">Akhiri</button>
+                            <button class="btn btn-modal-outline w-100 py-2" id="btnEnd">Akhiri</button>
                         </div>
+                    </div>
+
+                    <div class="success-message" id="successMessage">
+                        <i class="bi bi-check-circle-fill me-2"></i>
+                        <span id="successText"></span>
                     </div>
                     
                     <div class="text-center mt-3" style="cursor: pointer;" data-bs-dismiss="modal">
@@ -336,5 +443,170 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        const chatContent = document.getElementById('chatContent');
+        const messageInput = document.getElementById('messageInput');
+        const btnSend = document.getElementById('btnSend');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const btnAttach = document.getElementById('btnAttach');
+        const btnCamera = document.getElementById('btnCamera');
+        const btnMic = document.getElementById('btnMic');
+        const btnRefund = document.getElementById('btnRefund');
+        const btnEnd = document.getElementById('btnEnd');
+        const successMessage = document.getElementById('successMessage');
+        const successText = document.getElementById('successText');
+
+        let orderIssueModal;
+
+        function getCurrentTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            return `${hours}.${minutes}`;
+        }
+
+        function scrollToBottom() {
+            chatContent.scrollTop = chatContent.scrollHeight;
+        }
+
+        function createMessageBubble(text, type = 'sent') {
+            const bubble = document.createElement('div');
+            bubble.className = `message-bubble message-${type}`;
+            bubble.innerHTML = `
+                ${text}
+                <span class="message-time">${getCurrentTime()}</span>
+            `;
+            return bubble;
+        }
+
+        function createSystemMessage(text) {
+            const bubble = document.createElement('div');
+            bubble.className = 'message-bubble message-system';
+            bubble.innerHTML = `
+                ${text}<br>
+                <span class="opacity-75">[Pesan ini dibuat secara otomatis]</span>
+                <span class="message-time text-end">${getCurrentTime()}</span>
+            `;
+            return bubble;
+        }
+
+        function sendMessage() {
+            const text = messageInput.value.trim();
+            if (text === '') return;
+
+            const messageBubble = createMessageBubble(text, 'sent');
+            chatContent.insertBefore(messageBubble, typingIndicator);
+            
+            messageInput.value = '';
+            scrollToBottom();
+
+            // Simulasi balasan dari customer yang sedang complaint
+            setTimeout(() => {
+                typingIndicator.classList.add('show');
+                scrollToBottom();
+
+                setTimeout(() => {
+                    typingIndicator.classList.remove('show');
+                    
+                    const complaintReplies = [
+                        'Iya kak, terima kasih sudah cepat tanggap',
+                        'Oke deh kak, tapi lain kali hati-hati ya',
+                        'MASIH LAMA GAK SIH?',
+                        'Oke kak, ditunggu refundnya',
+                        'Makasih kak sudah membantu'
+                    ];
+                    
+                    const randomReply = complaintReplies[Math.floor(Math.random() * complaintReplies.length)];
+                    const replyBubble = createMessageBubble(randomReply, 'received');
+                    chatContent.insertBefore(replyBubble, typingIndicator);
+                    scrollToBottom();
+                }, 2000);
+            }, 500);
+        }
+
+        btnSend.addEventListener('click', sendMessage);
+
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        btnAttach.addEventListener('click', () => {
+            alert('Fitur attachment akan segera hadir!');
+        });
+
+        btnCamera.addEventListener('click', () => {
+            alert('Fitur kamera akan segera hadir!');
+        });
+
+        btnMic.addEventListener('click', () => {
+            alert('Fitur voice message akan segera hadir!');
+        });
+
+        // Handle Refund Button
+        btnRefund.addEventListener('click', () => {
+            successText.textContent = 'Refund berhasil diproses!';
+            successMessage.classList.add('show');
+
+            setTimeout(() => {
+                const systemMsg = createSystemMessage('Refund sebesar Rp 10.000 telah diproses');
+                chatContent.insertBefore(systemMsg, typingIndicator);
+                scrollToBottom();
+
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                    
+                    if (orderIssueModal) {
+                        orderIssueModal.hide();
+                    }
+
+                    setTimeout(() => {
+                        typingIndicator.classList.add('show');
+                        scrollToBottom();
+
+                        setTimeout(() => {
+                            typingIndicator.classList.remove('show');
+                            const thankYouMsg = createMessageBubble('Makasih ya kak sudah refund. Maaf ya merepotkan 🙏', 'received');
+                            chatContent.insertBefore(thankYouMsg, typingIndicator);
+                            scrollToBottom();
+                        }, 2000);
+                    }, 500);
+                }, 1500);
+            }, 2000);
+        });
+
+        // Handle End Button
+        btnEnd.addEventListener('click', () => {
+            successText.textContent = 'Percakapan telah diakhiri';
+            successMessage.classList.add('show');
+
+            setTimeout(() => {
+                const systemMsg = createSystemMessage('Chat dengan Bambang Gemoy telah diakhiri');
+                chatContent.insertBefore(systemMsg, typingIndicator);
+                scrollToBottom();
+
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                    
+                    if (orderIssueModal) {
+                        orderIssueModal.hide();
+                    }
+
+                    messageInput.disabled = true;
+                    messageInput.placeholder = 'Chat telah diakhiri';
+                }, 1500);
+            }, 2000);
+        });
+
+        // Initialize modal
+        document.addEventListener('DOMContentLoaded', () => {
+            const modalElement = document.getElementById('orderIssueModal');
+            orderIssueModal = new bootstrap.Modal(modalElement);
+            
+            scrollToBottom();
+        });
+    </script>
 </body>
 </html>

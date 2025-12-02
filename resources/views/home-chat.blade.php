@@ -83,6 +83,7 @@
             font-weight: 500;
             border: 1px solid transparent;
             transition: all 0.2s;
+            cursor: pointer;
         }
 
         .chip-active {
@@ -118,29 +119,18 @@
             background-color: #fafafa;
         }
 
-        /* --- LOGIKA BARU: COMPLAINT / PINNED --- */
-        /* Hanya muncul jika customer komplain */
         .chat-item-complaint {
-            background-color: #FFF; /* Tetap putih atau bisa sedikit di-highlight */
+            background-color: #FFF;
         }
 
-        /* Garis Oranye di kiri sebagai penanda 'PINNED/COMPLAINT' */
         .chat-item-complaint::before {
             content: '';
             position: absolute;
             left: 0;
             top: 0;
             bottom: 0;
-            width: 6px; /* Sedikit lebih tebal agar jelas */
+            width: 6px;
             background-color: var(--brand-orange);
-        }
-
-        /* Opsional: Menambahkan ikon pin kecil secara visual jika diinginkan */
-        .pin-icon {
-            font-size: 0.7rem;
-            color: var(--brand-text-muted);
-            margin-right: 4px;
-            transform: rotate(45deg);
         }
 
         .avatar {
@@ -241,6 +231,10 @@
             font-weight: 600;
             text-decoration: none;
         }
+
+        .hidden {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -256,18 +250,19 @@
 
         <div class="search-container">
             <i class="bi bi-search search-icon"></i>
-            <input type="text" class="form-control search-input" placeholder="Cari pesan atau nama....">
+            <input type="text" class="form-control search-input" id="searchInput" placeholder="Cari pesan atau nama....">
         </div>
 
         <div class="filter-chips">
-            <button class="chip chip-active">All</button>
-            <button class="chip chip-inactive">Unread</button>
+            <button class="chip chip-active" data-filter="all">All</button>
+            <button class="chip chip-inactive" data-filter="unread">Unread</button>
         </div>
     </div>
 
-    <div class="chat-list">
+    <div class="chat-list" id="chatList">
         
-        <div class="chat-item chat-item-complaint">
+        <!-- Bambang - Complaint (redirect ke chatroom-complaint) -->
+        <div class="chat-item chat-item-complaint" data-redirect="/chatroom-complaint" data-user-id="bambang" data-unread="true">
             <img src="https://i.pravatar.cc/150?u=bambang" alt="User" class="avatar">
             <div class="chat-info">
                 <div class="chat-name">
@@ -281,7 +276,8 @@
             </div>
         </div>
 
-        <div class="chat-item">
+        <!-- Jessica - Unread (redirect ke chatroom) -->
+        <div class="chat-item" data-redirect="/chatroom" data-user-id="jessica" data-unread="true">
             <img src="https://i.pravatar.cc/150?u=jessica" alt="User" class="avatar">
             <div class="chat-info">
                 <div class="chat-name">Jessica Jung</div>
@@ -293,7 +289,8 @@
             </div>
         </div>
 
-        <div class="chat-item">
+        <!-- Siti - Unread (redirect ke chatroom) -->
+        <div class="chat-item" data-redirect="/chatroom" data-user-id="siti" data-unread="true">
             <img src="https://i.pravatar.cc/150?u=siti" alt="User" class="avatar">
             <div class="chat-info">
                 <div class="chat-name">Siti Maharani</div>
@@ -305,7 +302,8 @@
             </div>
         </div>
 
-        <div class="chat-item">
+        <!-- Jeremi - Read (redirect ke chatroom) -->
+        <div class="chat-item" data-redirect="/chatroom" data-user-id="jeremi" data-unread="false">
             <img src="https://i.pravatar.cc/150?u=jeremi" alt="User" class="avatar">
             <div class="chat-info">
                 <div class="chat-name">Jeremi Siahaan</div>
@@ -334,5 +332,69 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Redirect functionality untuk chat items
+        document.querySelectorAll('.chat-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const redirectUrl = this.getAttribute('data-redirect');
+                const userId = this.getAttribute('data-user-id');
+                
+                if (redirectUrl) {
+                    // Redirect menggunakan window.location.href untuk Laravel route
+                    window.location.href = redirectUrl + '?user=' + userId;
+                }
+            });
+        });
+
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.chip');
+        const chatItems = document.querySelectorAll('.chat-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Update active state
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('chip-active');
+                    btn.classList.add('chip-inactive');
+                });
+                this.classList.remove('chip-inactive');
+                this.classList.add('chip-active');
+
+                // Filter chat items
+                const filter = this.getAttribute('data-filter');
+                
+                chatItems.forEach(item => {
+                    if (filter === 'all') {
+                        item.classList.remove('hidden');
+                    } else if (filter === 'unread') {
+                        const isUnread = item.getAttribute('data-unread') === 'true';
+                        if (isUnread) {
+                            item.classList.remove('hidden');
+                        } else {
+                            item.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            chatItems.forEach(item => {
+                const name = item.querySelector('.chat-name').textContent.toLowerCase();
+                const preview = item.querySelector('.chat-preview').textContent.toLowerCase();
+                
+                if (name.includes(searchTerm) || preview.includes(searchTerm)) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
