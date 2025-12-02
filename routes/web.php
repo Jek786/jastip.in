@@ -25,7 +25,7 @@ Route::get('/dashboard', function (Request $request) { //5026231038 - Nabila Shi
 
     $user = $request->session()->get('user');
 
-    return view('dashboard', compact('user'));
+    return view('dashboard', compact('user')); //5026231010 - Daniel Setiawan Yulius Putra
 })->name('dashboard');
 
 Route::get('/managementpengantaran', function (Request $request) { //5026231038 - Nabila Shinta Luthfia
@@ -43,11 +43,11 @@ Route::get('/test-managementpengantaran', function () {
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); //5026231038 - Nabila Shinta Luthfia
 
-Route::get('/bahasa', function () {
+Route::get('/bahasa', function () { //5026231010 - Daniel Setiawan Yulius Putra
     return view('bahasa');
 })->name('bahasa');
 
-Route::get('/profile', function () {
+Route::get('/profile', function () { //5026231010 - Daniel Setiawan Yulius Putra
     return view('profile');
 })->name('profile');
 
