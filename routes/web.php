@@ -6,27 +6,32 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JastipController;
 
 
-Route::get('/', function () {  //5026231038 - Nabila Shinta Luthfia
+Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login'); //5026231038 - Nabila Shinta Luthfia
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
-
-Route::get('/daftar', [AuthController::class, 'showDaftar'])->name('daftar'); //5026231010 - Daniel Setiawan Yulius Putra
+Route::get('/daftar', [AuthController::class, 'showDaftar'])->name('daftar');
 Route::post('/daftar', [AuthController::class, 'daftar'])->name('daftar.submit');
 
+// Dashboard dengan session
+Route::get('/dashboard', function (Request $request) {
 
-Route::get('/dashboard', function (Request $request) { //5026231038 - Nabila Shinta Luthfia
-    if (!$request->session()->has('role')) {
+    // Jika belum login → tendang ke login
+    if (!$request->session()->has('user')) {
         return redirect()->route('login');
     }
 
+    // Ambil data user dari session
     $user = $request->session()->get('user');
 
-    return view('dashboard', compact('user')); 
+    return view('dashboard', compact('user'));
+
 })->name('dashboard');
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/managementpengantaran', function (Request $request) { //5026231038 - Nabila Shinta Luthfia
     if (!$request->session()->has('role')) {
