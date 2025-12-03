@@ -10,29 +10,33 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+// Login  // 5026231038 - Nabila Shinta Luthfia
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
+// Register  // 5026231038 - Nabila Shinta Luthfia
 Route::get('/daftar', [AuthController::class, 'showDaftar'])->name('daftar');
 Route::post('/daftar', [AuthController::class, 'daftar'])->name('daftar.submit');
 
-// Dashboard dengan session
+/// Dashboard (butuh login)  // 5026231038 - Nabila Shinta Luthfia
 Route::get('/dashboard', function (Request $request) {
 
-    // Jika belum login → tendang ke login
+    // Cek apakah user sudah login 
     if (!$request->session()->has('user')) {
         return redirect()->route('login');
     }
 
-    // Ambil data user dari session
+   // Ambil data user dari session  
     $user = $request->session()->get('user');
 
     return view('dashboard', compact('user'));
 
 })->name('dashboard');
 
+// Logout  // 5026231038 - Nabila Shinta Luthfia
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Management Pengantaran (butuh login)  // 5026231038 - Nabila Shinta Luthfia
 Route::get('/managementpengantaran', function (Request $request) { //5026231038 - Nabila Shinta Luthfia
     if (!$request->session()->has('role')) {
         return redirect()->route('login');
@@ -41,12 +45,12 @@ Route::get('/managementpengantaran', function (Request $request) { //5026231038 
     return view('managementpengantaran');
 })->name('managementpengantaran');
 
-// ROUTE TEST — bisa lihat halaman tanpa login //5026231038 - Nabila Shinta Luthfia
+// Route khusus testing tanpa login  // 5026231038 - Nabila Shinta Luthfia
 Route::get('/test-managementpengantaran', function () {
     return view('managementpengantaran');
 })->name('test.managementpengantaran');
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); //5026231038 - Nabila Shinta Luthfia
+
 
 Route::get('/bahasa', function () { //5026231010 - Daniel Setiawan Yulius Putra
     return view('bahasa');

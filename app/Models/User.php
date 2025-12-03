@@ -11,20 +11,20 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    // Kolom yang boleh diisi melalui create()
+    // kolom yang boleh diisi
     protected $fillable = [
         'name',
         'email',
         'password',
     ];
 
-    // Kolom yang disembunyikan dari response
+    // kolom yang disembunyikan
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    // Casting attribute
+    // casting otomatis
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
