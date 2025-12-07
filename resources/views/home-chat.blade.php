@@ -317,16 +317,16 @@
     </div>
 
     <div class="bottom-nav">
-        <a href="#" class="nav-btn-active">
+        <a href="home-chat" class="nav-btn-active">
             <i class="bi bi-chat-left-text-fill"></i>
             <span>Chat</span>
         </a>
 
-        <a href="#" class="nav-center-btn text-decoration-none">
+        <a href="welcome" class="nav-center-btn text-decoration-none">
             <i class="bi bi-shop"></i>
         </a>
 
-        <a href="#" class="text-decoration-none">
+        <a href="profile" class="text-decoration-none">
             <i class="bi bi-person-fill fs-2" style="color: var(--brand-orange);"></i>
         </a>
     </div>
@@ -336,13 +336,22 @@
     <script>
         // Redirect functionality untuk chat items
         document.querySelectorAll('.chat-item').forEach(item => {
-            item.addEventListener('click', function() {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
                 const redirectUrl = this.getAttribute('data-redirect');
                 const userId = this.getAttribute('data-user-id');
                 
+                console.log('Clicked!'); // Debug
+                console.log('Redirect URL:', redirectUrl); // Debug
+                console.log('User ID:', userId); // Debug
+                
                 if (redirectUrl) {
+                    const fullUrl = redirectUrl + '?user=' + userId;
+                    console.log('Full URL:', fullUrl); // Debug
+                    
                     // Redirect menggunakan window.location.href untuk Laravel route
-                    window.location.href = redirectUrl + '?user=' + userId;
+                    window.location.href = fullUrl;
                 }
             });
         });

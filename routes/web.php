@@ -3,19 +3,20 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ChatController;
 
-Route::get('/', function () {
+Route::get('/', function () {  //5026231038 - Nabila Shinta Luthfia
     return view('home');
 })->name('home');
 
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login'); //5026231038 - Nabila Shinta Luthfia
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-Route::post('/register', [AuthController::class, 'register']);
 
-Route::get('/dashboard', function (Request $request) {
+Route::get('/daftar', [AuthController::class, 'showDaftar'])->name('daftar');
+Route::post('/daftar', [AuthController::class, 'daftar'])->name('daftar.submit');
+
+
+Route::get('/dashboard', function (Request $request) { //5026231038 - Nabila Shinta Luthfia
     if (!$request->session()->has('role')) {
         return redirect()->route('login');
     }
@@ -25,7 +26,7 @@ Route::get('/dashboard', function (Request $request) {
     return view('dashboard', compact('user'));
 })->name('dashboard');
 
-Route::get('/managementpengantaran', function (Request $request) {
+Route::get('/managementpengantaran', function (Request $request) { //5026231038 - Nabila Shinta Luthfia
     if (!$request->session()->has('role')) {
         return redirect()->route('login');
     }
@@ -33,11 +34,12 @@ Route::get('/managementpengantaran', function (Request $request) {
     return view('managementpengantaran');
 })->name('managementpengantaran');
 
+// 🔥 ROUTE TEST — bisa lihat halaman tanpa login
 Route::get('/test-managementpengantaran', function () {
     return view('managementpengantaran');
 })->name('test.managementpengantaran');
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); //5026231038 - Nabila Shinta Luthfia
 
 Route::get('/bahasa', function () {
     return view('bahasa');
@@ -47,7 +49,7 @@ Route::get('/profile', function () {
     return view('profile');
 })->name('profile');
 
-Route::get('/welcome', function () {
+Route::get('/welcome', function () { //5026231038 - Nabila Shinta Luthfia
     return view('welcome');
 })->name('welcome');
 
@@ -81,3 +83,44 @@ Route::prefix('chat')->name('chat.')->group(function () {
 });
 
 Route::get('/test-chat/{buyerId}', [ChatController::class, 'show'])->name('test.chat');
+Route::get('/test-daftar', function () {
+    return view('daftar');
+})->name('test.daftar');
+
+Route::get('/test-pesananMasuk', function () {
+    return view('pesananMasuk');
+})->name('pesananMasuk');
+
+Route::get('/buka-jastip', [JastipController::class, 'index'])
+    ->name('jastip.index');
+
+Route::post('/buka-jastip/waktu', [JastipController::class, 'setWaktu'])
+    ->name('jastip.setWaktu');
+
+Route::post('/buka-jastip/slot', [JastipController::class, 'setSlot'])
+    ->name('jastip.setSlot');
+
+Route::post('/buka-jastip/biaya', [JastipController::class, 'setBiaya'])
+    ->name('jastip.setBiaya');
+
+Route::post('/buka-jastip/start', [JastipController::class, 'startJastip'])
+    ->name('jastip.start');
+
+// Route untuk Forgot Password
+Route::get('/forgot-password', [AuthController::class, 'showForgotPassword'])->name('forgot.password');
+Route::get('/forgotpass-otp', [AuthController::class, 'showOtpVerification'])->name('forgot.otp');
+
+// API Routes untuk AJAX
+Route::post('/api/forgot-password', [AuthController::class, 'forgotPassword']);
+Route::post('/api/verify-otp', [AuthController::class, 'verifyOtp']);
+
+Route::get('/newpass', function () {
+    $email = request()->query('email');
+    
+    // Cek apakah user sudah verifikasi OTP
+    if (!session('reset_verified')) {
+        return redirect()->route('forgot.password')->with('error', 'Silakan verifikasi OTP terlebih dahulu.');
+    }
+    
+    return view('newpass', compact('email'));
+})->name('reset.password');
