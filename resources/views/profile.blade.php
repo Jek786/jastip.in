@@ -140,9 +140,11 @@
         
         <header class="d-flex align-items-center justify-content-between p-4">
             <div class="d-flex align-items-center">
+                <a href="{{ route('setupSeller') }}">
                 <img src="https://via.placeholder.com/70x70/E0E0E0/B0B0B0?text=ruddy" 
                      alt="Foto Profil" 
                      class="profile-img me-3">
+                </a>
                 <div>
                     <span class="d-block text-secondary">Halo,</span>
                     <h4 class="fw-bold mb-0">{{ $user->name }}</h4>

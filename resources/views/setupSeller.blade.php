@@ -240,7 +240,7 @@
                     <h5 class="fw-bold text-success">Biodata Berhasil Disimpan</h5>
                     <p class="text-muted small">Biodata anda berhasil diperbarui</p>
                     
-                    <button class="btn-orange mt-2" onclick="window.location.href='{{ route('dashboard') }}'">Kembali ke Menu</button>
+                    <button class="btn-orange mt-2" onclick="window.location.href='{{ route('welcome') }}'">Kembali ke Menu</button>
                 </div>
             </div>
         </div>
