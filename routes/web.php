@@ -25,18 +25,18 @@ Route::post('/daftar', [AuthController::class, 'daftar'])->name('daftar.submit')
 // Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// ================= DASHBOARD & MANAGEMENT =================
+// ================= Welcome =================
 
-// Dashboard (butuh login)
-Route::get('/dashboard', function (Request $request) {
+// Welcome (butuh login)
+Route::get('/welcome', function (Request $request) {
     // Cek apakah user sudah login 
     if (!$request->session()->has('user')) {
         return redirect()->route('login');
     }
     // Ambil data user dari session  
     $user = $request->session()->get('user');
-    return view('dashboard', compact('user'));
-})->name('dashboard');
+    return view('welcome', compact('user'));
+})->name('welcome'); // Daniel Setiawan - 5026231010
 
 // Management Pengantaran (butuh login)
 Route::get('/managementpengantaran', function (Request $request) { 
@@ -61,10 +61,6 @@ Route::get('/bahasa', function () { //5026231010 - Daniel Setiawan Yulius Putra
 Route::get('/profile', function () { //5026231010 - Daniel Setiawan Yulius Putra
     return view('profile');
 })->name('profile');
-
-Route::get('/welcome', function () { //5026231038 - Nabila Shinta Luthfia
-    return view('welcome');
-})->name('welcome');
 
 // ================= CHAT SYSTEM =================
 
