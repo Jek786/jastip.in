@@ -1,3 +1,4 @@
+{{-- 5026231010 - Daniel Setiawan Yulius Putra --}}
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -10,23 +11,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
     <style>
-        /* Menjadikan latar belakang abu-abu seperti di prototipe */
         body {
-            background-color: #f8f9fa; /* Ini adalah kelas .bg-light Bootstrap */
+            background-color: #f8f9fa; 
         }
-
-        /* Memberi batasan lebar agar terlihat seperti layar ponsel */
         .mobile-screen-container {
             max-width: 450px;
             margin: auto;
         }
-
-        /* Meniru radius sudut yang besar dari prototipe */
         .rounded-custom {
-            border-radius: 1rem; /* .rounded-5 di Bootstrap 5.3+ */
+            border-radius: 1rem; 
         }
-
-        /* Mengatur ukuran "dot" ikon agar sesuai */
         .dot-icon {
             font-size: 12px;
         }

@@ -2,10 +2,16 @@
 
 ## Getting Started
 
-### eLlawliet --> Daniel Setiawan
-### Jek786 --> Dzaky Ahmad
-### nabilashinta --> Nabila Shinta
-### chandiki --> Amandea Chandiki 
+### eLlawliet       = Daniel Setiawan     5026231010
+### Jek786          = Dzaky Ahmad         5026231184
+### nabilashinta    = Nabila Shinta       5026231038
+### chandiki        = Amandea Chandiki    5026231139
+### 1harbima        = Harbima Razan       5026231225
+
+### Jastip.in — Aplikasi Jasa Titip Makanan Asrama Mahasiswa ITS
+Jastip.in adalah aplikasi jasa titip (jastip) makanan yang dikembangkan khusus untuk lingkungan asrama mahasiswa ITS. Aplikasi ini membantu mahasiswa yang tidak memiliki kendaraan, sedang sibuk, atau sekadar malas keluar untuk tetap bisa mendapatkan makanan dengan mudah dan cepat.
+
+Pada proyek ini, aplikasi dibangun menggunakan POV (Point of View) Seller, sehingga fitur dan alur kerja berfokus pada pengalaman dan kebutuhan penjual/jastiper dalam menerima, mengelola, dan menyelesaikan pesanan.
 
 ### 1. Clone this Repo
 Use bash or terminal to clone this repo

@@ -3,55 +3,70 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
+// TAMBAHAN: Import Controller lain agar tidak error
+use App\Http\Controllers\ChatController; 
+use App\Http\Controllers\JastipController;
 
-Route::get('/', function () {  //5026231038 - Nabila Shinta Luthfia
+Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login'); //5026231038 - Nabila Shinta Luthfia
+// ================= AUTHENTICATION =================
+// 5026231038 - Nabila Shinta Luthfia
+
+// Login
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
-
+// Register
 Route::get('/daftar', [AuthController::class, 'showDaftar'])->name('daftar');
 Route::post('/daftar', [AuthController::class, 'daftar'])->name('daftar.submit');
 
+// Logout
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/dashboard', function (Request $request) { //5026231038 - Nabila Shinta Luthfia
-    if (!$request->session()->has('role')) {
+// ================= DASHBOARD & MANAGEMENT =================
+
+// Dashboard (butuh login)
+Route::get('/dashboard', function (Request $request) {
+    // Cek apakah user sudah login 
+    if (!$request->session()->has('user')) {
         return redirect()->route('login');
     }
-
+    // Ambil data user dari session  
     $user = $request->session()->get('user');
-
     return view('dashboard', compact('user'));
 })->name('dashboard');
 
-Route::get('/managementpengantaran', function (Request $request) { //5026231038 - Nabila Shinta Luthfia
-    if (!$request->session()->has('role')) {
+// Management Pengantaran (butuh login)
+Route::get('/managementpengantaran', function (Request $request) { 
+    // PERBAIKAN: Ubah 'role' menjadi 'user' agar sesuai dengan AuthController
+    if (!$request->session()->has('user')) {
         return redirect()->route('login');
     }
-
     return view('managementpengantaran');
 })->name('managementpengantaran');
 
-// 🔥 ROUTE TEST — bisa lihat halaman tanpa login
+// Route khusus testing tanpa login
 Route::get('/test-managementpengantaran', function () {
     return view('managementpengantaran');
 })->name('test.managementpengantaran');
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); //5026231038 - Nabila Shinta Luthfia
+// ================= HALAMAN LAIN =================
 
-Route::get('/bahasa', function () {
+Route::get('/bahasa', function () { //5026231010 - Daniel Setiawan Yulius Putra
     return view('bahasa');
 })->name('bahasa');
 
-Route::get('/profile', function () {
+Route::get('/profile', function () { //5026231010 - Daniel Setiawan Yulius Putra
     return view('profile');
 })->name('profile');
 
 Route::get('/welcome', function () { //5026231038 - Nabila Shinta Luthfia
     return view('welcome');
 })->name('welcome');
+
+// ================= CHAT SYSTEM =================
 
 Route::get('/home-chat', function () {
     return view('home-chat');
@@ -83,6 +98,9 @@ Route::prefix('chat')->name('chat.')->group(function () {
 });
 
 Route::get('/test-chat/{buyerId}', [ChatController::class, 'show'])->name('test.chat');
+
+// ================= JASTIP & PESANAN =================
+
 Route::get('/test-daftar', function () {
     return view('daftar');
 })->name('test.daftar');
@@ -91,29 +109,20 @@ Route::get('/test-pesananMasuk', function () {
     return view('pesananMasuk');
 })->name('pesananMasuk');
 
-Route::get('/buka-jastip', [JastipController::class, 'index'])
-    ->name('jastip.index');
+Route::get('/buka-jastip', [JastipController::class, 'index'])->name('jastip.index');
+Route::post('/buka-jastip/waktu', [JastipController::class, 'setWaktu'])->name('jastip.setWaktu');
+Route::post('/buka-jastip/slot', [JastipController::class, 'setSlot'])->name('jastip.setSlot');
+Route::post('/buka-jastip/biaya', [JastipController::class, 'setBiaya'])->name('jastip.setBiaya');
+Route::post('/buka-jastip/start', [JastipController::class, 'startJastip'])->name('jastip.start');
 
-Route::post('/buka-jastip/waktu', [JastipController::class, 'setWaktu'])
-    ->name('jastip.setWaktu');
+// ================= FORGOT PASSWORD =================
 
-Route::post('/buka-jastip/slot', [JastipController::class, 'setSlot'])
-    ->name('jastip.setSlot');
-
-Route::post('/buka-jastip/biaya', [JastipController::class, 'setBiaya'])
-    ->name('jastip.setBiaya');
-
-Route::post('/buka-jastip/start', [JastipController::class, 'startJastip'])
-    ->name('jastip.start');
-
-// Route untuk Forgot Password
+// Halaman Input Email
 Route::get('/forgot-password', [AuthController::class, 'showForgotPassword'])->name('forgot.password');
+// Halaman Input OTP
 Route::get('/forgotpass-otp', [AuthController::class, 'showOtpVerification'])->name('forgot.otp');
 
-// API Routes untuk AJAX
-Route::post('/api/forgot-password', [AuthController::class, 'forgotPassword']);
-Route::post('/api/verify-otp', [AuthController::class, 'verifyOtp']);
-
+// Halaman Input Password Baru
 Route::get('/newpass', function () {
     $email = request()->query('email');
     
@@ -123,4 +132,11 @@ Route::get('/newpass', function () {
     }
     
     return view('newpass', compact('email'));
-})->name('reset.password');
+})->name('reset.password.view');
+
+// API Routes untuk Proses Logic (AJAX)
+Route::post('/api/forgot-password', [AuthController::class, 'forgotPassword']);
+Route::post('/api/verify-otp', [AuthController::class, 'verifyOtp']);
+
+// TAMBAHAN: Route untuk submit password baru (Wajib ada agar tombol simpan berfungsi)
+Route::post('/api/reset-password', [AuthController::class, 'resetPassword'])->name('api.reset.password');
