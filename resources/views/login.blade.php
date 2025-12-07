@@ -97,7 +97,8 @@
                     <span class="input-group-text"><i class="bi bi-lock"></i></span>
                     <input type="password" name="password" class="form-control" placeholder="Masukkan kata sandi anda" required>
                 </div>
-                <a href="#" class="d-block mt-2 small text-orange text-end">Lupa kata sandi?</a>
+                <!-- Revisi: Link lupa kata sandi mengarah ke halaman forgot password -->
+                <a href="{{ route('forgot.password') }}" class="d-block mt-2 small text-orange text-end">Lupa kata sandi?</a>
             </div>
 
             <button type="submit" class="btn-orange mt-3">Masuk</button>

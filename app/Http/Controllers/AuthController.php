@@ -4,7 +4,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User; // Kita standarisasi pakai User agar konsisten dengan Login/Daftar
+use App\Models\User; 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
@@ -27,7 +27,6 @@ class AuthController extends Controller
         $email = $request->emailAddress;
         $password = $request->password;
 
-        // Cari user dari tabel users
         $user = User::where('email', $email)->first();
 
         if ($user && Hash::check($password, $user->password)) {
@@ -45,7 +44,7 @@ class AuthController extends Controller
         return redirect()->route('login');
     }
 
-    // ================= DAFTAR / REGISTER =================
+    // ================= REGISTER / DAFTAR =================
     public function showDaftar()
     {
         return view('daftar');
@@ -81,8 +80,6 @@ class AuthController extends Controller
         ]);
 
         $email = $request->email;
-
-        // PERBAIKAN: Gunakan User model agar konsisten dengan Login/Daftar
         $user = User::where('email', $email)->first();
         
         if (!$user) {
@@ -92,22 +89,18 @@ class AuthController extends Controller
             ], 404);
         }
 
-        // Generate OTP
         $otp = rand(100000, 999999);
-
-        // Simpan OTP ke cache (5 menit)
         Cache::put('otp_' . $email, [
             'otp' => $otp,
             'user_id' => $user->id
         ], now()->addMinutes(5));
 
-        // Log OTP untuk debugging (Cek file storage/logs/laravel.log untuk lihat kodenya)
         Log::info("OTP untuk {$email}: {$otp}");
 
         return response()->json([
             'success' => true,
             'message' => 'Kode OTP telah dikirim ke email Anda.',
-            'otp' => $otp // Hapus baris ini nanti saat production!
+            'otp' => $otp // Hanya untuk testing, hapus di production
         ], 200);
     }
 
@@ -170,7 +163,6 @@ class AuthController extends Controller
             ], 403);
         }
 
-        // PERBAIKAN: Gunakan User model
         $user = User::where('email', $email)->first();
 
         if (!$user) {
