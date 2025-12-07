@@ -37,7 +37,7 @@ class AuthController extends Controller
             $request->session()->put('user', $user);
             $request->session()->put('role', $role);
             $request->session()->put('user_id', $user->IDBuyer ?? $user->IDDriver);
-            return redirect()->route('dashboard');
+            return redirect()->route('welcome'); //5026231010 - Daniel Setiawan Yulius Putra
         }
 
         return back()->with('error', 'Email atau password salah.');

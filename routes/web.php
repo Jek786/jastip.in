@@ -14,7 +14,7 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login'); //502
 Route::post('/login', [AuthController::class, 'login']);
 
 
-Route::get('/daftar', [AuthController::class, 'showDaftar'])->name('daftar'); //5026231010 - Daniel Setiawan Yulius Putra
+Route::get('/daftar', [AuthController::class, 'showDaftar'])->name('daftar');
 Route::post('/daftar', [AuthController::class, 'daftar'])->name('daftar.submit');
 
 
@@ -25,7 +25,7 @@ Route::get('/dashboard', function (Request $request) { //5026231038 - Nabila Shi
 
     $user = $request->session()->get('user');
 
-    return view('dashboard', compact('user')); 
+    return view('dashboard', compact('user'));
 })->name('dashboard');
 
 Route::get('/managementpengantaran', function (Request $request) { //5026231038 - Nabila Shinta Luthfia

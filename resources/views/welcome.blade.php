@@ -1,4 +1,4 @@
-{{-- 5026231010 - Daniel Setiawan --}}
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -11,6 +11,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
     <style>
+        /* == CUSTOM STYLING == */
+
+        /* * Latar belakang abu-abu untuk body 
+         * dan padding-bottom agar konten tidak tertutup nav
+        */
         body {
             background-color: #f8f9fa; /* Kelas .bg-light Bootstrap */
             padding-bottom: 120px; /* Memberi ruang untuk bottom nav */
