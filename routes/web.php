@@ -1,11 +1,12 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
-// TAMBAHAN: Import Controller lain agar tidak error
 use App\Http\Controllers\ChatController; 
 use App\Http\Controllers\JastipController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
+
 
 Route::get('/', function () {
     return view('home');
@@ -26,17 +27,23 @@ Route::post('/daftar', [AuthController::class, 'daftar'])->name('daftar.submit')
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // ================= Welcome =================
+// Daniel Setiawan - 5026231010
+Route::middleware('auth')->group(function () {
+    
+    // Welcome Page
+    Route::get('/welcome', function () {
+        // You can use Auth::user() here too
+        return view('welcome', ['user' => Auth::user()]);
+    })->name('welcome');
 
-// Welcome (butuh login)
-Route::get('/welcome', function (Request $request) {
-    // Cek apakah user sudah login 
-    if (!$request->session()->has('user')) {
-        return redirect()->route('login');
-    }
-    // Ambil data user dari session  
-    $user = $request->session()->get('user');
-    return view('welcome', compact('user'));
-})->name('welcome'); // Daniel Setiawan - 5026231010
+    // Profile Page
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    
+    // Detail Transaksi
+    Route::get('/detail-transaksi', function() {
+        return view('detailtransaksi');
+    })->name('detailtransaksi');
+});
 
 Route::get('/welcome-public', function () {
     return view('welcome');
@@ -62,10 +69,6 @@ Route::get('/test-managementpengantaran', function () {
 Route::get('/bahasa', function () { //5026231010 - Daniel Setiawan Yulius Putra
     return view('bahasa');
 })->name('bahasa');
-
-Route::get('/profile', function () { //5026231010 - Daniel Setiawan Yulius Putra
-    return view('profile');
-})->name('profile');
 
 // ================= CHAT SYSTEM =================
 
@@ -110,6 +113,7 @@ Route::get('/test-pesananMasuk', function () {
     return view('pesananMasuk');
 })->name('pesananMasuk');
 
+<<<<<<< Updated upstream
 Route::get('/buka-jastip', [JastipController::class, 'index'])->name('jastip.index');
 Route::post('/buka-jastip/waktu', [JastipController::class, 'setWaktu'])->name('jastip.setWaktu');
 Route::post('/buka-jastip/slot', [JastipController::class, 'setSlot'])->name('jastip.setSlot');
@@ -141,3 +145,12 @@ Route::post('/api/verify-otp', [AuthController::class, 'verifyOtp']);
 
 // TAMBAHAN: Route untuk submit password baru (Wajib ada agar tombol simpan berfungsi)
 Route::post('/api/reset-password', [AuthController::class, 'resetPassword'])->name('api.reset.password');
+=======
+Route::get('/buka-jastip', function () {
+    return view('bukajastip'); 
+})->name('bukaJastip');
+
+Route::get('/setup-seller', function () {
+    return view('setupSeller');
+})->name('setupSeller');
+>>>>>>> Stashed changes

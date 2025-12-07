@@ -48,16 +48,12 @@
             color: #432818; /* Warna teks gelap */
         }
 
-        /* * Teks saldo yang besar dan oranye
-         */
         .saldo-amount {
             color: #F7A01B;
             font-weight: 700;
             font-size: 2rem; /* Ukuran teks lebih besar dari h2 */
         }
 
-        /* * Daftar menu dengan radius sudut besar 
-         */
         .menu-list-group {
             border-radius: 1.5rem; /* .rounded-5 */
             overflow: hidden; /* Penting agar item pertama/terakhir mengikuti radius */
@@ -107,7 +103,6 @@
 
         /* Tombol navigasi tengah yang besar dan oranye */
         .btn-nav-center {
-            background-color: #F7A01B;
             color: #432818;
             width: 60px;
             height: 60px;
@@ -150,7 +145,7 @@
                      class="profile-img me-3">
                 <div>
                     <span class="d-block text-secondary">Halo,</span>
-                    <h4 class="fw-bold mb-0">Ruddy</h4>
+                    <h4 class="fw-bold mb-0">{{ $user->name }}</h4>
                 </div>
             </div>
             <a href="#" class="text-danger fs-3">
@@ -168,7 +163,7 @@
 
             <div class="list-group menu-list-group shadow-sm">
                 
-                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <a href="{{ route('detailtransaksi') }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                     <span>Detail Transaksi</span>
                     <i class="bi bi-chevron-right text-secondary"></i>
                 </a>
@@ -203,8 +198,8 @@
                     <i class="bi bi-shop fs-2"></i>
                 </a>
                 
-                <a href="{{ route('profile') }}"class="nav-link">
-                    <i class="bi bi-person fs-3"></i>
+                <a href="{{ route('profile') }}" class="btn-profile-active">
+                    <i class="bi bi-person"></i>
                 </a>
 
             </div>

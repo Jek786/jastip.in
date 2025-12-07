@@ -1,6 +1,6 @@
 <?php
 // 5026231038 - Nabila Shinta Luthfia
-
+// Updated change to laravel Auth 5026231010 - Daniel Setiawan Yulius Putra
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -17,6 +18,7 @@ class AuthController extends Controller
         return view('login');
     }
 
+    // From here
     public function login(Request $request)
     {
         $request->validate([
@@ -24,15 +26,13 @@ class AuthController extends Controller
             'password' => 'required|min:6',
         ]);
 
-        $email = $request->emailAddress;
-        $password = $request->password;
+        $credentials = [
+            'email' => $request->emailAddress, 
+            'password' => $request->password
+        ];
 
-        $user = User::where('email', $email)->first();
-
-        if ($user && Hash::check($password, $user->password)) {
-            $request->session()->put('user', $user);
-            $request->session()->put('user_id', $user->id);
-            // Redirect langsung ke halaman welcome
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate(); // Important for security
             return redirect()->route('welcome');
         }
 
@@ -41,9 +41,12 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->session()->flush();
+        Auth::logout(); // Use Auth facade
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect()->route('login');
     }
+    // Update until here
 
     // ================= REGISTER / DAFTAR =================
     public function showDaftar()
