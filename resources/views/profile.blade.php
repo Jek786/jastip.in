@@ -145,7 +145,7 @@
                      class="profile-img me-3">
                 <div>
                     <span class="d-block text-secondary">Halo,</span>
-                    <h4 class="fw-bold mb-0">Ruddy</h4>
+                    <h4 class="fw-bold mb-0">{{ $user->name }}</h4>
                 </div>
             </div>
             <a href="#" class="text-danger fs-3">

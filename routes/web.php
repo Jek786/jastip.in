@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChatController; 
 use App\Http\Controllers\JastipController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
+
 
 Route::get('/', function () {
     return view('home');
@@ -24,13 +27,23 @@ Route::post('/daftar', [AuthController::class, 'daftar'])->name('daftar.submit')
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // ================= Welcome =================
-Route::get('/welcome', function (Request $request) {
-    if (!$request->session()->has('user')) {
-        return redirect()->route('login');
-    }
-    $user = $request->session()->get('user');
-    return view('welcome', compact('user'));
-})->name('welcome'); // Daniel Setiawan - 5026231010
+// Daniel Setiawan - 5026231010
+Route::middleware('auth')->group(function () {
+    
+    // Welcome Page
+    Route::get('/welcome', function () {
+        // You can use Auth::user() here too
+        return view('welcome', ['user' => Auth::user()]);
+    })->name('welcome');
+
+    // Profile Page
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    
+    // Detail Transaksi
+    Route::get('/detail-transaksi', function() {
+        return view('detailtransaksi');
+    })->name('detailtransaksi');
+});
 
 // Management Pengantaran (butuh login)
 Route::get('/managementpengantaran', function (Request $request) { 
@@ -51,14 +64,6 @@ Route::get('/test-managementpengantaran', function () {
 Route::get('/bahasa', function () { //5026231010 - Daniel Setiawan Yulius Putra
     return view('bahasa');
 })->name('bahasa');
-
-route::get('/detail-transaksi',action:function(){
-    return view('detailtransaksi');
-})->name('detailtransaksi'); //5026231010 - Daniel Setiawan Yulius Putra
-
-Route::get('/profile', function () { //5026231010 - Daniel Setiawan Yulius Putra
-    return view('profile');
-})->name('profile');
 
 // ================= CHAT SYSTEM =================
 
