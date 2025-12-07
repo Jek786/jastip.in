@@ -38,6 +38,11 @@ Route::get('/welcome', function (Request $request) {
     return view('welcome', compact('user'));
 })->name('welcome'); // Daniel Setiawan - 5026231010
 
+Route::get('/welcome-public', function () {
+    return view('welcome');
+})->name('welcome.public');
+
+
 // Management Pengantaran (butuh login)
 Route::get('/managementpengantaran', function (Request $request) { 
     // PERBAIKAN: Ubah 'role' menjadi 'user' agar sesuai dengan AuthController

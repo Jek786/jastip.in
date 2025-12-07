@@ -179,14 +179,13 @@
         </div>
 
 
-        <!-- ========================== GEDUNG 1 ========================== -->
-        <!-- (SEMUA BAGIAN DI BAWAH TIDAK DIUBAH, SAMA PERSIS PUNYAMU) -->
+        <!-- ========================== GEDUNG Asrama Blok J ========================== -->
 
         <div class="building-card shadow-sm mb-3">
             <div class="d-flex align-items-center mb-2">
-                <img src="images/gedung1.png" class="building-img me-2">
+                <img src="images/gedungasrama1.jpg" class="building-img me-2">
                 <div>
-                    <h6 class="fw-bold m-0">Gedung 1</h6>
+                    <h6 class="fw-bold m-0">Gedung Asrama Blok J</h6>
                     <small class="text-muted">
                         <span id="gedung1Count">3</span> Pesanan
                     </small>
@@ -196,7 +195,7 @@
             <!-- Dropdowns users -->
             <!-- Soobin -->
             <div class="list-header d-flex justify-content-between" onclick="toggleDropdown('drop1','arrow1')">
-                <span>Mary</span>
+                <span>soobin</span>
                 <small class="text-muted">
                     <span id="label-soobin">1 Pesanan Selesai</span>
                     <span id="arrow1">▼</span>
@@ -206,7 +205,7 @@
             <div id="drop1" class="px-2 d-none">
                 <div class="list-item d-flex align-items-center">
                     <input type="checkbox" class="form-check-input me-2 order-check" data-user="soobin" data-status="done">
-                    <img src="images/ayampenyet.jpg" class="user-img me-3">
+                    <img src="images/panas1.jpg" class="user-img me-3">
                     <div>
                         <p class="m-0 fw-semibold">Panas1</p>
                         <small>Status: <span class="status-text text-success fw-bold">Selesai</span></small>
@@ -226,7 +225,7 @@
             <div id="drop2" class="px-2 d-none">
                 <div class="list-item d-flex align-items-center">
                     <input type="checkbox" class="form-check-input me-2 order-check" data-user="yeonjun" data-status="pending">
-                    <img src="images/user2.jpg" class="user-img me-3">
+                    <img src="images/panasspesial.jpg" class="user-img me-3">
                     <div>
                         <p class="m-0 fw-semibold">Panas Spesial</p>
                         <small>Status: <span class="status-text text-warning fw-bold">Tersisa</span></small>
@@ -246,7 +245,7 @@
             <div id="drop3" class="px-2 d-none">
                 <div class="list-item d-flex align-items-center">
                     <input type="checkbox" class="form-check-input me-2 order-check" data-user="beomgyu" data-status="pending">
-                    <img src="images/user3.jpg" class="user-img me-3">
+                    <img src="images/burgerpremium.jpg" class="user-img me-3">
                     <div>
                         <p class="m-0 fw-semibold">Burger Premium</p>
                         <small>Status: <span class="status-text text-warning fw-bold">Tersisa</span></small>
@@ -256,15 +255,15 @@
         </div>
 
 
-        <!-- ========================== TW 1 ========================== -->
+        <!-- ========================== Gedung Asrama Blok H ========================== -->
 
         <div class="building-card shadow-sm mb-5">
             <div class="d-flex align-items-center mb-2">
-                <img src="images/gedung2.png" class="building-img me-2">
+                <img src="images/gedungasrama2.jpg" class="building-img me-2">
                 <div>
-                    <h6 class="fw-bold m-0">TW-1</h6>
+                    <h6 class="fw-bold m-0">Gedung Asrama Blok H</h6>
                     <small class="text-muted">
-                        <span id="tw1Count">3</span> Pesanan
+                        <span id="gedung2Count">3</span> Pesanan
                     </small>
                 </div>
             </div>
@@ -281,7 +280,7 @@
             <div id="drop4" class="px-2 d-none">
                 <div class="list-item d-flex align-items-center">
                     <input type="checkbox" class="form-check-input me-2 order-check" data-user="siti" data-status="done">
-                    <img src="images/user1.jpg" class="user-img me-3">
+                    <img src="images/nasitelur.jpg" class="user-img me-3">
                     <div>
                         <p class="m-0 fw-semibold">Nasi Telur</p>
                         <small>Status: <span class="status-text text-success fw-bold">Selesai</span></small>
@@ -301,7 +300,7 @@
             <div id="drop5" class="px-2 d-none">
                 <div class="list-item d-flex align-items-center">
                     <input type="checkbox" class="form-check-input me-2 order-check" data-user="bambang" data-status="done">
-                    <img src="images/user2.jpg" class="user-img me-3">
+                    <img src="images/ayamgeprek.jpg" class="user-img me-3">
                     <div>
                         <p class="m-0 fw-semibold">Ayam Geprek</p>
                         <small>Status: <span class="status-text text-success fw-bold">Selesai</span></small>
@@ -321,7 +320,7 @@
             <div id="drop6" class="px-2 d-none">
                 <div class="list-item d-flex align-items-center">
                     <input type="checkbox" class="form-check-input me-2 order-check" data-user="jessica" data-status="pending">
-                    <img src="images/user3.jpg" class="user-img me-3">
+                    <img src="images/kopilatte.jpg" class="user-img me-3">
                     <div>
                         <p class="m-0 fw-semibold">Kopi Latte</p>
                         <small>Status: <span class="status-text text-warning fw-bold">Tersisa</span></small>
@@ -344,7 +343,7 @@
         <div class="popup-box">
             <div class="popup-title">Apakah ingin mengakhiri sesi jastip?</div>
 
-            <button class="popup-btn-ya" onclick="goToDashboard()">Ya</button>
+            <button class="popup-btn-ya" onclick="window.location.href='{{ route('welcome.public') }}'">Ya</button>
             <button class="popup-btn-tidak" onclick="closePopup()">Tidak</button>
         </div>
     </div>
@@ -363,9 +362,10 @@
             document.getElementById("popup").style.display = "none";
         }
 
-        function goToDashboard() {
-             window.location.href = "/dashboard"; 
-        }
+       function goToWelcome() {
+             window.location.href = "{{ route('welcome') }}";
+       }
+
 
         const checkboxes = document.querySelectorAll(".order-check");
 
