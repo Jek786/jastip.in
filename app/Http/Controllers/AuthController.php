@@ -33,7 +33,7 @@ class AuthController extends Controller
         if ($user && Hash::check($password, $user->password)) {
             $request->session()->put('user', $user);
             $request->session()->put('user_id', $user->id);
-            return redirect()->route('dashboard');
+            return redirect()->route('welcome');
         }
 
         return back()->with('error', 'Email atau password salah.');

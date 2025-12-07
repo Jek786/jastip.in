@@ -26,14 +26,10 @@ Route::post('/daftar', [AuthController::class, 'daftar'])->name('daftar.submit')
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // ================= Welcome =================
-
-// Welcome (butuh login)
 Route::get('/welcome', function (Request $request) {
-    // Cek apakah user sudah login 
     if (!$request->session()->has('user')) {
         return redirect()->route('login');
     }
-    // Ambil data user dari session  
     $user = $request->session()->get('user');
     return view('welcome', compact('user'));
 })->name('welcome'); // Daniel Setiawan - 5026231010
@@ -57,6 +53,10 @@ Route::get('/test-managementpengantaran', function () {
 Route::get('/bahasa', function () { //5026231010 - Daniel Setiawan Yulius Putra
     return view('bahasa');
 })->name('bahasa');
+
+route::get('/detail-transaksi',action:function(){
+    return view('detailtransaksi');
+})->name('detailtransaksi'); //5026231010 - Daniel Setiawan Yulius Putra
 
 Route::get('/profile', function () { //5026231010 - Daniel Setiawan Yulius Putra
     return view('profile');

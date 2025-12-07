@@ -168,7 +168,7 @@
 
             <div class="list-group menu-list-group shadow-sm">
                 
-                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <a href="{{ route('detailtransaksi') }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                     <span>Detail Transaksi</span>
                     <i class="bi bi-chevron-right text-secondary"></i>
                 </a>
