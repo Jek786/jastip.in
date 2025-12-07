@@ -48,16 +48,12 @@
             color: #432818; /* Warna teks gelap */
         }
 
-        /* * Teks saldo yang besar dan oranye
-         */
         .saldo-amount {
             color: #F7A01B;
             font-weight: 700;
             font-size: 2rem; /* Ukuran teks lebih besar dari h2 */
         }
 
-        /* * Daftar menu dengan radius sudut besar 
-         */
         .menu-list-group {
             border-radius: 1.5rem; /* .rounded-5 */
             overflow: hidden; /* Penting agar item pertama/terakhir mengikuti radius */
@@ -107,7 +103,6 @@
 
         /* Tombol navigasi tengah yang besar dan oranye */
         .btn-nav-center {
-            background-color: #F7A01B;
             color: #432818;
             width: 60px;
             height: 60px;
@@ -203,8 +198,8 @@
                     <i class="bi bi-shop fs-2"></i>
                 </a>
                 
-                <a href="{{ route('profile') }}"class="nav-link">
-                    <i class="bi bi-person fs-3"></i>
+                <a href="{{ route('profile') }}" class="btn-profile-active">
+                    <i class="bi bi-person"></i>
                 </a>
 
             </div>

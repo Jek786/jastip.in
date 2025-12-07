@@ -1,9 +1,7 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
-// TAMBAHAN: Import Controller lain agar tidak error
 use App\Http\Controllers\ChatController; 
 use App\Http\Controllers\JastipController;
 
