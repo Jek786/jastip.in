@@ -113,12 +113,6 @@ Route::get('/test-pesananMasuk', function () {
     return view('pesananMasuk');
 })->name('pesananMasuk');
 
-<<<<<<< Updated upstream
-Route::get('/buka-jastip', [JastipController::class, 'index'])->name('jastip.index');
-Route::post('/buka-jastip/waktu', [JastipController::class, 'setWaktu'])->name('jastip.setWaktu');
-Route::post('/buka-jastip/slot', [JastipController::class, 'setSlot'])->name('jastip.setSlot');
-Route::post('/buka-jastip/biaya', [JastipController::class, 'setBiaya'])->name('jastip.setBiaya');
-Route::post('/buka-jastip/start', [JastipController::class, 'startJastip'])->name('jastip.start');
 
 // ================= FORGOT PASSWORD =================
 
@@ -145,7 +139,6 @@ Route::post('/api/verify-otp', [AuthController::class, 'verifyOtp']);
 
 // TAMBAHAN: Route untuk submit password baru (Wajib ada agar tombol simpan berfungsi)
 Route::post('/api/reset-password', [AuthController::class, 'resetPassword'])->name('api.reset.password');
-=======
 Route::get('/buka-jastip', function () {
     return view('bukajastip'); 
 })->name('bukaJastip');
@@ -153,4 +146,3 @@ Route::get('/buka-jastip', function () {
 Route::get('/setup-seller', function () {
     return view('setupSeller');
 })->name('setupSeller');
->>>>>>> Stashed changes
