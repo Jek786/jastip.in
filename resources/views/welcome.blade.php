@@ -1,4 +1,4 @@
-
+{{-- 5026231010 - Daniel Setiawan --}}
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -118,7 +118,7 @@
         
         <main class="container-fluid pt-4">
             
-            <h4 class="fw-bold mb-4 px-2">Halo, John!</h4>
+            <h4 class="fw-bold mb-4 px-2">Halo, {{ $user->name }}!</h4>
 
             <div class="card card-jastip border-0 shadow-sm mx-2">
                 <div class="card-body text-center p-4 position-relative">
