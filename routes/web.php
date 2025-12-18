@@ -22,9 +22,16 @@ Route::post('/login', [AuthController::class, 'login']);
 // Register
 Route::get('/daftar', [AuthController::class, 'showDaftar'])->name('daftar');
 Route::post('/daftar', [AuthController::class, 'daftar'])->name('daftar.submit');
+Route::get('/dashboard', function () {
+    return view('dashboard', [
+        'user' => Auth::user()
+    ]);
+})->name('dashboard');
+
 
 // Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
 // ================= Welcome =================
 // Daniel Setiawan - 5026231010

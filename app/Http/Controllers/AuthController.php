@@ -62,14 +62,16 @@ class AuthController extends Controller
             'password'      => 'required|min:6|confirmed',
         ]);
 
-        User::create([
+        $user = User::create([
             'name'     => $request->name,
             'email'    => $request->emailAddress,
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
-    }
+        Auth::login($user);
+
+         return redirect()->route('dashboard');
+        }
 
     // ================= FORGOT PASSWORD =================
     public function showForgotPassword()
