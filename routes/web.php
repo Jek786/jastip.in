@@ -81,6 +81,10 @@ Route::get('/bahasa', function () { //5026231010 - Daniel Setiawan Yulius Putra
     return view('bahasa');
 })->name('bahasa');
 
+Route::get('/dashboard', function () { //5026231038 - Nabila Shinta Luthfia
+    return view('dashboard');
+})->middleware('auth')->name('dashboard');
+
 // ================= CHAT SYSTEM =================
 
 Route::get('/home-chat', function () {
@@ -156,6 +160,6 @@ Route::get('/buka-jastip', function () {
 
 Route::get('/setup-seller', function () {
     return view('setupSeller');
-})->name('setupSeller');
+})->middleware('auth')->name('setupSeller');
 
-
+//route dashboard ke

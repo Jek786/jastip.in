@@ -1,66 +1,157 @@
-<!DOCTYPE html> <!-- 5026231038 - Nabila Shinta Luthfia -->
+<!DOCTYPE html>
+<!-- 5026231038 - Nabila Shinta Luthfia -->
 <html lang="id">
 <head>
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Jastip.in</title>
 
+    <!-- Bootstrap & Font -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- CSS -->
     <style>
-        body { background-color: #f2f4f7; font-family: 'Poppins', sans-serif; } 
-        .option-card { border-radius: 20px; background: #ffffff; } 
-        .icon-wrapper { width: 80px; height: 80px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: auto; }
-        .bg-teal { background-color: #60c4b5; } 
-        .btn-outline-teal { border: 2px solid #60c4b5; color: #60c4b5; } 
-        .btn-outline-teal:hover { background-color: #60c4b5; color: #fff; } 
-        .btn-outline-warning { border: 2px solid #FFC107; color: #FFC107; } 
-        .btn-outline-warning:hover { background-color: #FFC107; color: #fff; } 
+        body {
+            background-color: #f2f4f7;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .dashboard-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 16px;
+        }
+
+        .card-role {
+            background: #fff;
+            border-radius: 22px;
+            padding: 32px 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,.08);
+            text-align: center;
+            height: 100%;
+        }
+
+        .icon-circle {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        .icon-warning { background: #ffc107; }
+        .icon-teal { background: #60c4b5; }
+
+        .icon-circle img {
+            width: 46px;
+        }
+
+        .btn-warning-custom {
+            border: 2px solid #ffc107;
+            color: #ffc107;
+            border-radius: 999px;
+            padding: 10px;
+            font-weight: 600;
+        }
+
+        .btn-warning-custom:hover {
+            background: #ffc107;
+            color: #fff;
+        }
+
+        .btn-teal-custom {
+            border: 2px solid #60c4b5;
+            color: #60c4b5;
+            border-radius: 999px;
+            padding: 10px;
+            font-weight: 600;
+        }
+
+        .btn-teal-custom:hover {
+            background: #60c4b5;
+            color: #fff;
+        }
+
+        /* LOGOUT FIXED */
+        .logout-fixed {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 999;
+        }
     </style>
 </head>
-<body class="bg-light"> 
+<body>
 
-    <div class="container py-4"> 
+<div class="dashboard-wrapper">
+    <div class="container">
 
-        <div class="text-center mt-4"> <!-- Header selamat datang -->
-            <h2 class="fw-bold text-warning">Selamat Datang {{ $user->name }}!</h2> <!-- Nama user dari session -->
-            <h5 class="text-secondary mt-1">Kamu mau jadi apa?</h5>
-            <p class="text-muted small">Pilih Peran Anda di Jastip.in</p>
+        <!-- HEADER -->
+        <div class="text-center mb-5">
+            <h2 class="fw-bold text-warning">
+                Selamat Datang {{ auth()->user()->name }}!
+            </h2>
+            <p class="text-secondary mb-0">Kamu mau jadi apa hari ini?</p>
         </div>
 
-        <div class="row justify-content-center mt-4"> <!-- Pilihan role -->
+        <!-- CARD MENU -->
+        <div class="row justify-content-center g-4">
 
-            <div class="col-11 col-md-6 mb-4"> <!-- Card buka jastip -->
-                <div class="option-card shadow p-4 text-center">
-                    <div class="icon-wrapper bg-warning mb-3"> <!-- Ikon -->
-                        <img src="https://cdn-icons-png.flaticon.com/512/3448/3448610.png" width="48" alt="">
+            <!-- BUKA JASTIP -->
+            <div class="col-12 col-md-5">
+                <div class="card-role">
+                    <div class="icon-circle icon-warning">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3448/3448610.png" alt="Buka Jastip">
                     </div>
+
                     <h5 class="fw-bold">Saya Mau Buka Jastip</h5>
-                    <p class="text-muted small">Dapatkan penghasilan tambahan dengan menjadi jastiper terpercaya.</p>
-                    <a href="#" class="btn btn-outline-warning fw-semibold px-4 w-100 rounded-pill">Mulai Jastip</a> <!-- Tombol -->
+                    <p class="text-muted small">
+                        Dapatkan penghasilan tambahan dengan menjadi jastiper terpercaya.
+                    </p>
+
+                    <a href="{{ route('setupSeller') }}"
+                       class="btn btn-warning-custom w-100 mt-3">
+                        Mulai Jastip
+                    </a>
                 </div>
             </div>
 
-            <div class="col-11 col-md-6 mb-4"> <!-- Card titip makanan -->
-                <div class="option-card shadow p-4 text-center">
-                    <div class="icon-wrapper bg-teal mb-3">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2331/2331970.png" width="48" alt="">
+            <!-- TITIP MAKANAN -->
+            <div class="col-12 col-md-5">
+                <div class="card-role">
+                    <div class="icon-circle icon-teal">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2331/2331970.png" alt="Titip Makanan">
                     </div>
+
                     <h5 class="fw-bold">Saya Mau Titip Makanan</h5>
-                    <p class="text-muted small">Jelajahi berbagai jastiper dan temukan makanan favoritmu dari mana saja.</p>
-                    <a href="#" class="btn btn-outline-teal fw-semibold px-4 w-100 rounded-pill">Mulai Pesan</a>
+                    <p class="text-muted small">
+                        Jelajahi berbagai jastiper dan temukan makanan favoritmu.
+                    </p>
+
+                    <a href="#"
+                       class="btn btn-teal-custom w-100 mt-3">
+                        Mulai Pesan
+                    </a>
                 </div>
             </div>
 
         </div>
-
-        <form action="{{ route('logout') }}" method="POST"> <!-- Form logout -->
-            @csrf
-            <button type="submit" class="btn btn-danger mt-3">Logout</button> <!-- Tombol logout -->
-        </form>
-
     </div>
+</div>
+
+<!-- LOGOUT DI BAWAH KIRI -->
+<div class="logout-fixed">
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button class="btn btn-danger rounded-pill px-4">
+            Logout
+        </button>
+    </form>
+</div>
 
 </body>
 </html>
