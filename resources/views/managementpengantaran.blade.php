@@ -343,7 +343,7 @@
         <div class="popup-box">
             <div class="popup-title">Apakah ingin mengakhiri sesi jastip?</div>
 
-            <button class="popup-btn-ya" onclick="window.location.href='{{ route('welcome.public') }}'">Ya</button>
+            <button class="popup-btn-ya" onclick="window.location.href='{{ route('login') }}'">Ya</button>
             <button class="popup-btn-tidak" onclick="closePopup()">Tidak</button>
         </div>
     </div>

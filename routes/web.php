@@ -49,10 +49,9 @@ Route::get('/welcome-public', function () {
     return view('welcome');
 })->name('welcome.public');
 
-
-// Management Pengantaran (butuh login)
+// ================= Mangement Pengantaran =================
+// 5026231038 - Nabila Shinta Luthfia
 Route::get('/managementpengantaran', function (Request $request) { 
-    // PERBAIKAN: Ubah 'role' menjadi 'user' agar sesuai dengan AuthController
     if (!$request->session()->has('user')) {
         return redirect()->route('login');
     }
@@ -63,6 +62,11 @@ Route::get('/managementpengantaran', function (Request $request) {
 Route::get('/test-managementpengantaran', function () {
     return view('managementpengantaran');
 })->name('test.managementpengantaran');
+
+//Route Pesanan Masuk ke Management Pengantaran
+Route::get('/pesanan-masuk', function () {
+    return view('pesananMasuk');
+})->name('pesanan.masuk');
 
 // ================= HALAMAN LAIN =================
 
@@ -146,3 +150,5 @@ Route::get('/buka-jastip', function () {
 Route::get('/setup-seller', function () {
     return view('setupSeller');
 })->name('setupSeller');
+
+

@@ -622,14 +622,15 @@
     }
 
     if (btnConfirmMulai){
-      btnConfirmMulai.addEventListener("click", function(){
-        if (timerId !== null){
-          clearInterval(timerId);
-          timerId = null;
-        }
-        confirmModal.hide();
-      });
+  btnConfirmMulai.addEventListener("click", function(){
+    if (timerId !== null){
+      clearInterval(timerId);
+      timerId = null;
     }
+    confirmModal.hide();
+    window.location.href = "{{ route('managementpengantaran') }}";
+  });
+}
   </script>
 </body>
 </html>
