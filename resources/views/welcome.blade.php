@@ -135,13 +135,8 @@
                     <div class="my-3">
                         <h5 class="fw-bold" style="color: #432818;">Jastip kamu belum buka nih. Atur dulu yuk!</h5>
                     </div>
-                    
-<<<<<<< Updated upstream
                     <a href="{{ route('bukaJastip') }}"
                     class="btn btn-orange rounded-pill w-100 py-2 fs-5">
-=======
-                    <a href="{{ route('bukaJastip') }}" class="btn btn-orange rounded-pill w-100 py-2 fs-5">
->>>>>>> Stashed changes
                         Buka Jastip
                     </a>
                 </div>
