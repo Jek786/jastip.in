@@ -85,6 +85,9 @@ Route::get('/dashboard', function () { //5026231038 - Nabila Shinta Luthfia
     return view('dashboard');
 })->middleware('auth')->name('dashboard');
 
+Route::get('/faq', function () { //5026231010 - Daniel Setiawan Yulius Putra
+    return view('faq');
+})->name('faq');
 // ================= CHAT SYSTEM =================
 
 Route::get('/home-chat', function () {

@@ -11,55 +11,44 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
     <style>
-        /* == CUSTOM STYLING == */
 
-        /* * Latar belakang abu-abu untuk body 
-         * dan padding-bottom agar konten tidak tertutup nav
-        */
         body {
-            background-color: #f8f9fa; /* Kelas .bg-light Bootstrap */
-            padding-bottom: 120px; /* Memberi ruang untuk bottom nav */
+            background-color: #f8f9fa; 
+            padding-bottom: 120px;
         }
 
-        /* * Wadah utama untuk membatasi lebar
-         * agar terlihat seperti layar ponsel 
-        */
         .mobile-screen-container {
             max-width: 450px;
             margin: auto;
             background-color: #f8f9fa;
         }
 
-        /* * Gambar profil melingkar
-         */
         .profile-img {
             width: 70px;
             height: 70px;
             object-fit: cover;
             border-radius: 50%;
-            border: 2px solid white; /* Border putih tipis jika diperlukan */
+            border: 2px solid white; 
         }
 
-        /* * Card saldo dengan radius sudut besar 
-         */
         .card-saldo {
-            border-radius: 1.5rem; /* .rounded-5 */
+            border-radius: 1.5rem;
             background-color: white;
-            color: #432818; /* Warna teks gelap */
+            color: #432818;
         }
 
         .saldo-amount {
             color: #F7A01B;
             font-weight: 700;
-            font-size: 2rem; /* Ukuran teks lebih besar dari h2 */
+            font-size: 2rem;
         }
 
         .menu-list-group {
-            border-radius: 1.5rem; /* .rounded-5 */
-            overflow: hidden; /* Penting agar item pertama/terakhir mengikuti radius */
+            border-radius: 1.5rem; 
+            overflow: hidden; 
         }
         
-        /* Item daftar menu */
+
         .menu-list-group .list-group-item {
             padding: 1rem 1.5rem;
             border-color: #e9ecef; /* Warna border lebih lembut */
@@ -78,9 +67,6 @@
             padding-bottom: 1.5rem; /* Jarak aman dari bawah layar */
         }
 
-        /* * Navigasi berbentuk pil putih.
-         * Menggunakan d-flex untuk menyusun ikon.
-        */
         .bottom-nav-pill {
             display: flex;
             justify-content: space-around;
@@ -170,7 +156,7 @@
                     <i class="bi bi-chevron-right text-secondary"></i>
                 </a>
                 
-                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <a href="{{ route('bukaJastip') }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                     <span>Buka Jastip</span>
                     <i class="bi bi-chevron-right text-secondary"></i>
                 </a>
@@ -180,7 +166,7 @@
                     <i class="bi bi-chevron-right text-secondary"></i>
                 </a>
                 
-                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <a href="{{ route('faq') }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                     <span>FAQs</span>
                     <i class="bi bi-chevron-right text-secondary"></i>
                 </a>
