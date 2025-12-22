@@ -124,10 +124,9 @@ Route::get('/test-daftar', function () {
     return view('daftar');
 })->name('test.daftar');
 
-Route::get('/test-pesananMasuk', function () {
-    return view('pesananMasuk');
+Route::get('/pesanan-masuk', function () {
+    return view('pesananmasuk');
 })->name('pesananMasuk');
-
 
 // ================= FORGOT PASSWORD =================
 

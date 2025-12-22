@@ -554,7 +554,10 @@
           <div class="bottom-items">4 Item</div>
         </div>
       </div>
-      <button id="btnMulaiJastip" class="bottom-btn" type="button">Mulai Jastip</button>
+      <button id="btnMulaiJastip" class="bottom-btn" type="button">
+       Mulai Jastip
+      </button>
+
     </div>
   </div>
 
@@ -586,51 +589,26 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script>
-    const timeEl = document.getElementById("liveTime");
-    let elapsedSeconds = parseInt(timeEl.dataset.elapsed || "0", 10);
-    let timerId = null;
+<script>
+  const btnMulai = document.getElementById("btnMulaiJastip");
+  const modalEl = document.getElementById("confirmMulaiModal");
+  const confirmModal = new bootstrap.Modal(modalEl);
+  const btnConfirmMulai = document.getElementById("btnConfirmMulai");
 
-    function pad2(n){
-      return String(n).padStart(2, "0");
-    }
+  if (btnMulai){
+    btnMulai.addEventListener("click", function(){
+      confirmModal.show();
+    });
+  }
 
-    function renderTimer(){
-      const h = Math.floor(elapsedSeconds / 3600);
-      const m = Math.floor((elapsedSeconds % 3600) / 60);
-      const s = elapsedSeconds % 60;
-      timeEl.textContent = pad2(h) + ":" + pad2(m) + ":" + pad2(s);
-    }
+  if (btnConfirmMulai){
+    btnConfirmMulai.addEventListener("click", function(){
+      confirmModal.hide();
 
-    function tick(){
-      elapsedSeconds += 1;
-      renderTimer();
-    }
+      window.location.href = "{{ route('managementpengantaran') }}";
+    });
+  }
+</script>
 
-    renderTimer();
-    timerId = setInterval(tick, 1000);
-
-    const btnMulai = document.getElementById("btnMulaiJastip");
-    const modalEl = document.getElementById("confirmMulaiModal");
-    const confirmModal = new bootstrap.Modal(modalEl);
-    const btnConfirmMulai = document.getElementById("btnConfirmMulai");
-
-    if (btnMulai){
-      btnMulai.addEventListener("click", function(){
-        confirmModal.show();
-      });
-    }
-
-    if (btnConfirmMulai){
-  btnConfirmMulai.addEventListener("click", function(){
-    if (timerId !== null){
-      clearInterval(timerId);
-      timerId = null;
-    }
-    confirmModal.hide();
-    window.location.href = "{{ route('managementpengantaran') }}";
-  });
-}
-  </script>
 </body>
 </html>
