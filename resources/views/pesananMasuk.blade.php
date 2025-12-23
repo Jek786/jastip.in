@@ -595,17 +595,17 @@
   const confirmModal = new bootstrap.Modal(modalEl);
   const btnConfirmMulai = document.getElementById("btnConfirmMulai");
 
-  if (btnMulai){
-    btnMulai.addEventListener("click", function(){
+  if (btnMulai) {
+    btnMulai.addEventListener("click", function () {
       confirmModal.show();
     });
   }
 
-  if (btnConfirmMulai){
-    btnConfirmMulai.addEventListener("click", function(){
+  if (btnConfirmMulai) {
+    btnConfirmMulai.addEventListener("click", function () {
       confirmModal.hide();
 
-      window.location.href = "{{ route('managementpengantaran') }}";
+      window.location.href = "/managementpengantaran";
     });
   }
 </script>

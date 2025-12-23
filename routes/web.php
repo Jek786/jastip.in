@@ -58,12 +58,10 @@ Route::get('/welcome-public', function () {
 
 // ================= Mangement Pengantaran =================
 // 5026231038 - Nabila Shinta Luthfia
-Route::get('/managementpengantaran', function (Request $request) { 
-    if (!$request->session()->has('user')) {
-        return redirect()->route('login');
-    }
+Route::get('/managementpengantaran', function () {
     return view('managementpengantaran');
-})->name('managementpengantaran');
+})->middleware('auth')->name('managementpengantaran');
+
 
 // Route khusus testing tanpa login
 Route::get('/test-managementpengantaran', function () {
