@@ -1,6 +1,6 @@
 <?php
 // 5026231038 - Nabila Shinta Luthfia
-// Updated change to laravel Auth 5026231010 - Daniel Setiawan Yulius Putra
+// Updated change to laravel Auth by 5026231010 - Daniel Setiawan Yulius Putra
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ class AuthController extends Controller
         return view('login');
     }
 
-    // From here
+    // Updated From here
     public function login(Request $request)
     {
         $request->validate([

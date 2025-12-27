@@ -28,4 +28,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getSaldoRupiahAttribute()
+    {
+        return "Rp " . number_format($this->saldo, 2, '.', '.');
+    }
 }

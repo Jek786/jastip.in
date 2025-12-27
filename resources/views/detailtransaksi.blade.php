@@ -110,7 +110,9 @@
                         
                         <div class="flex justify-between items-center border-b border-gray-100 pb-4">
                             <span class="text-gray-900 font-medium">Saldo Tersedia</span>
-                            <span class="text-gray-900 font-bold" id="display-saldo">Rp75.000</span>
+                            <span class="text-gray-900 font-bold" id="display-saldo">
+                                {{ Auth::user()->saldo_rupiah }}
+                            </span>
                         </div>
 
                         <div class="flex flex-col">

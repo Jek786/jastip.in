@@ -9,7 +9,7 @@ class ProfileController extends Controller
     {
         // Get the currently logged in user automatically
         $user = Auth::user();
-
-        return view('profile', compact('user'));
+        $saldo = $user->saldo;
+        return view('profile', compact('user', 'saldo'));
     }
 }

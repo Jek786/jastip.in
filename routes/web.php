@@ -6,6 +6,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\JastipController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\SellerController;
 
 
 Route::get('/', function () {
@@ -158,8 +159,9 @@ Route::get('/buka-jastip', function () {
     return view('bukajastip'); 
 })->name('bukaJastip');
 
-Route::get('/setup-seller', function () {
-    return view('setupSeller');
-})->middleware('auth')->name('setupSeller');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/setup-seller', [SellerController::class, 'index'])->name('setupSeller');
+    Route::post('/setup-seller', [SellerController::class, 'store'])->name('seller.store');
+});
 
 //route dashboard ke

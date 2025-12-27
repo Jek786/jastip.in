@@ -121,23 +121,32 @@
     </style>
 </head>
 <body class="bg-light">
-
     <div class="mobile-screen-container">
-        
         <header class="d-flex align-items-center justify-content-between p-4">
             <div class="d-flex align-items-center">
+                
                 <a href="{{ route('setupSeller') }}">
-                <img src="https://via.placeholder.com/70x70/E0E0E0/B0B0B0?text=ruddy" 
-                     alt="Foto Profil" 
-                     class="profile-img me-3">
+                    
+                    @if($user->foto_profil)
+                        <img src="{{ asset('storage/' . $user->foto_profil) }}" 
+                            alt="Foto Profil" 
+                            class="profile-img me-3">
+                    @else
+                        <img src="https://via.placeholder.com/70x70/E0E0E0/B0B0B0?text={{ substr($user->name, 0, 1) }}" 
+                            alt="Foto Profil" 
+                            class="profile-img me-3">
+                    @endif
+
                 </a>
+
                 <div>
                     <span class="d-block text-secondary">Halo,</span>
                     <h4 class="fw-bold mb-0">{{ $user->name }}</h4>
                 </div>
             </div>
             <a href="#" class="text-danger fs-3">
-                <i class="bi bi-box-arrow-right"></i> </a>
+                <i class="bi bi-box-arrow-right"></i> 
+            </a>
         </header>
 
         <main class="container-fluid px-3">
@@ -145,7 +154,9 @@
             <div class="card card-saldo border-0 shadow-sm mb-4">
                 <div class="card-body p-4">
                     <p class="mb-1 text-secondary">Saldo sesi ini</p>
-                    <h2 class="saldo-amount">Rp 75.000,00</h2>
+                    <h2 class="saldo-amount">
+                        {{ $user->saldo_rupiah }}
+                    </h2>
                 </div>
             </div>
 
